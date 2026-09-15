@@ -4,4 +4,4 @@ class Category {
     }
 }
 
-export default {Category};
+export default Category;

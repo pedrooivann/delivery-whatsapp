@@ -1,7 +1,7 @@
 class Client {
-    constructor(telephone, name, address, createdAt){
-        this.telephone = telephone;
+    constructor(name,telephone, address, createdAt){
         this.name = name;
+        this.telephone = telephone;
         this.address = address;
         this.createdAt = createdAt;
     }
