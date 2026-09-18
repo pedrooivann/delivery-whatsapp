@@ -1,10 +1,10 @@
 
 class Product {
-    constructor (name, description, price, available) {
+    constructor (name, description, price, idCategory) {
         this.name = name;
         this.description =description;
         this.price = price;
-        this.available = available;
+        this.idCategory = idCategory;
     }
 }
 

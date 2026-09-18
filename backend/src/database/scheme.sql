@@ -28,7 +28,7 @@ CREATE TABLE product (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     id_client INT NOT NULL,
-    order_status VARCHAR(20) NOT NULL 
+    order_status VARCHAR(20) NOT NULL DEFAULT 'new'
         CHECK (order_status IN (
             'new', 
             'confirmed', 
@@ -42,7 +42,7 @@ CREATE TABLE orders (
     CHECK ( order_origin IN (
         'whatsapp_bot', 
         'whatsapp_manual')),
-    
+    ordered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_value DECIMAL(10, 2),
     delivery_address VARCHAR(50) NOT NULL,
 
@@ -51,7 +51,7 @@ CREATE TABLE orders (
 );
 
 
-CREATE TABLE orders_items (
+CREATE TABLE order_items (
     id SERIAL PRIMARY KEY,
     id_orders INT NOT NULL,
     id_product INT NOT NULL,

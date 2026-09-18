@@ -1,14 +1,11 @@
 class Orders {
-    constructor(dateHour, OrdersStatus, OrdersOrigin, totalValue, deliveryAddress) {
-        this.dateHour = dateHour;
-        this.OrdersStatus = OrdersStatus;
-        this.OrdersOrigin = OrdersOrigin;
-        this.totalValue = totalValue;
-        this.deliveryAddress = deliveryAddress;
+    constructor(OrderOrigin) {
+        this.OrderStatus = OrderStatus.NEW;
+        this.OrderOrigin = OrderOrigin;
     }
 }
 
-const OrdersStatus = Object.freeze({
+const OrderStatus = Object.freeze({
     NEW: 'new',
     CONFIRMED: 'confirmed',
     PREPARING: 'preparing',
@@ -18,15 +15,15 @@ const OrdersStatus = Object.freeze({
     CANCELED: 'canceled'
 });
 
-const OrdersOrigin = Object.freeze({
+const OrderOrigin = Object.freeze({
     WHATSAPP_BOT: 'whatsapp_bot',
     WHATSAPP_MANUAL:'whatsapp_manual'
-})
+});
 
 export default { //Default, pois na importação os dois serão uma coisa só -> OrderStatus obrigatoriamente acomapanhado de Order
     Orders,
-    OrdersStatus,
-    OrdersOrigin
+    OrderStatus,
+    OrderOrigin
 };
 
 //export default -> Importa como objeto unico e nomeavel
