@@ -2,9 +2,7 @@ import http from "http";
 
 const PORT = 8080;
 
-server.listen(PORT, ()=>{
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+
 
 const server = http.createServer((req, res) =>{
 
@@ -13,5 +11,9 @@ const server = http.createServer((req, res) =>{
 
 
 
+});
+
+server.listen(PORT, ()=>{
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
 
