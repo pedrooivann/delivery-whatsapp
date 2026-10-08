@@ -6,14 +6,14 @@ export async function getProduct (id){
         [id]
     );
     return result.rows[0];
-}
+};
 
 export async function getProducts(){
     const result = await pool.query(
         `SELECT * FROM product;`
     );
     return result.rows;
-}
+};
 
 export async function createProduct (name, description, price) {
     const result = await pool.query(
