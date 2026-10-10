@@ -81,7 +81,7 @@ export async function updateCategoryController (req, res){
     try {
         const updated = await updateCategory(id, name.trim());
     
-        if (!updated) return res.status(404).json({ message: "Categoria não encontrada" });
+        if (!updated) return res.status(404).json({ message: "Category not found" });
         
         return res.status(200).json(updated);
     }catch(error){
