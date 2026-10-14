@@ -58,3 +58,46 @@ export async function updateOrderAddress (id, delivery_address) {
     );
     return result.rows[0];
 };
+
+//Calcula variavel total
+export async function calculateTotal (id_orders) {
+
+    const client = await pool.connect();
+    let rollbackFailed = false;
+
+    try{
+
+        await client.query(`BEGIN`);
+        const result = await client.query (
+            `UPDATE orders
+            SET total_value = (
+            SELECT COALESCE(SUM(amount * unit_price), 0)
+            FROM order_items
+            WHERE id_orders = $1
+            )
+            WHERE id = $1
+            RETURNING *;`,
+            [id_orders]);
+        await client.query(`COMMIT`)
+
+        return result.rows[0];
+
+    
+    }catch(e){
+        try {
+            await client.query(`ROLLBACK`);
+        }catch(rollbackError){
+            rollbackFailed = true;
+            console.log("Rollback Failed ", rollbackFailed );
+        };
+        throw e;
+    }finally{
+
+        if(rollbackFailed){
+            client.release(new Error("Transaction state is uncertain"));
+        }else{
+            client.release()
+        };
+        
+    };
+};

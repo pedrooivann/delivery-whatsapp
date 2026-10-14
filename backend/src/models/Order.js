@@ -26,4 +26,3 @@ export default { //Default, pois na importação os dois serão uma coisa só ->
     OrderOrigin
 };
 
-//export default -> Importa como objeto unico e nomeavel

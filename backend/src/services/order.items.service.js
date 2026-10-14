@@ -15,17 +15,19 @@ export async function getOrderItems(){
     return result.rows;
 };
 
-export async function createOrderItems (id_orders, id_product, amount, unit_price) {
+export async function createOrderItem (id_orders, id_product, amount) {
     const result = await pool.query(
         `INSERT INTO order_items (id_orders, id_product, amount, unit_price) 
-        VALUES ($1, $2, $3, $4) 
+        SELECT $1, id, $3, price
+        FROM product
+        WHERE id=$2
         RETURNING  *;`,
-        [id_orders, id_product, amount, unit_price] 
+        [id_orders, id_product, amount] // id e price vão ser da tabela produto
         );
     return result.rows[0];
 };
 
-export async function deleteOrderItems (id) {
+export async function deleteOrderItem (id) {
     const result = await pool.query(
         `DELETE FROM order_items 
         WHERE id = $1
