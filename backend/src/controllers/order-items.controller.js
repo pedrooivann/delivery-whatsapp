@@ -5,6 +5,7 @@ import {
     deleteOrderItem,
     updateAmount,
 } from '../services/order.items.service.js';
+import { calculateTotal } from '../services/order.service.js';
 
 export async function getOrderItemController (req, res){
     const id = Number(req.params.id);
@@ -84,7 +85,7 @@ export async function deleteOrderItemController (req, res){
     };
 };
 
-export async function updateAmountController (req, res){
+export async function updateAmountController (req, res){ 
     const id = Number(req.params.id);
     const amount = Number(req.body.amount);
 
@@ -92,11 +93,11 @@ export async function updateAmountController (req, res){
     if (!Number.isInteger(amount) || amount<= 0) return res.status(400).json({message: "The amount of items must be valid!"});
 
     try {
-        const updated = await updateAmount(id, amount);
+        const orderItemUpdated = await updateAmount(id, amount);
     
-        if (!updated) return res.status(404).json({ message: "Order Item not found" });
+        if (!orderItemUpdated) return res.status(404).json({ message: "Order Item not found" });
         
-        return res.status(200).json(updated);
+        return res.status(200).json(orderItemUpdated);
     }catch(error){
         console.error("Error on updating Order Item", error);
 

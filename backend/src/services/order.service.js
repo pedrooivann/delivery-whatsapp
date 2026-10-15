@@ -15,12 +15,12 @@ export async function getOrder (id) {
     return result.rows[0];
 };
 
-export async function createOrder (id_client, order_origin, total_value, delivery_address) {
+export async function createOrder (id_client, order_origin, delivery_address) {
     const result = await pool.query(
-        `INSERT INTO orders (id_client, order_origin, total_value, delivery_address)
-        VALUES ($1, $2, $3, $4)
+        `INSERT INTO orders (id_client, order_origin, delivery_address)
+        VALUES ($1, $2, $3)
         RETURNING *;`,
-        [id_client, order_origin, total_value, delivery_address]
+        [id_client, order_origin, delivery_address]
     )
     return result.rows[0];
 };
@@ -62,13 +62,7 @@ export async function updateOrderAddress (id, delivery_address) {
 //Calcula variavel total
 export async function calculateTotal (id_orders) {
 
-    const client = await pool.connect();
-    let rollbackFailed = false;
-
-    try{
-
-        await client.query(`BEGIN`);
-        const result = await client.query (
+    const result = await pool.query(
             `UPDATE orders
             SET total_value = (
             SELECT COALESCE(SUM(amount * unit_price), 0)
@@ -78,26 +72,5 @@ export async function calculateTotal (id_orders) {
             WHERE id = $1
             RETURNING *;`,
             [id_orders]);
-        await client.query(`COMMIT`)
-
         return result.rows[0];
-
-    
-    }catch(e){
-        try {
-            await client.query(`ROLLBACK`);
-        }catch(rollbackError){
-            rollbackFailed = true;
-            console.log("Rollback Failed ", rollbackFailed );
-        };
-        throw e;
-    }finally{
-
-        if(rollbackFailed){
-            client.release(new Error("Transaction state is uncertain"));
-        }else{
-            client.release()
-        };
-        
     };
-};
