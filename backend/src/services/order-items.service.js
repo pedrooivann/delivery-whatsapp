@@ -15,8 +15,8 @@ export async function getOrderItems(){
     return result.rows;
 };
 
-export async function createOrderItem (id_orders, id_product, amount) {
-    const result = await pool.query(
+export async function createOrderItem (client, id_orders, id_product, amount) {
+    const result = await client.query(
         `INSERT INTO order_items (id_orders, id_product, amount, unit_price) 
         SELECT $1, id, $3, price
         FROM product
@@ -27,8 +27,8 @@ export async function createOrderItem (id_orders, id_product, amount) {
     return result.rows[0];
 };
 
-export async function deleteOrderItem (id) {
-    const result = await pool.query(
+export async function deleteOrderItem (client, id) {
+    const result = await client.query(
         `DELETE FROM order_items 
         WHERE id = $1
         RETURNING *;`,
@@ -37,8 +37,8 @@ export async function deleteOrderItem (id) {
     return result.rows[0];
 };
 
-export async function updateAmount (id, amount) {
-    const result = await pool.query(
+export async function updateAmount (client, id, amount) {
+    const result = await client.query(
         `UPDATE order_items
         SET amount= $2
         WHERE id= $1

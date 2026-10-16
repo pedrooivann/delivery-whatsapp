@@ -60,9 +60,9 @@ export async function updateOrderAddress (id, delivery_address) {
 };
 
 //Calcula variavel total
-export async function calculateTotal (id_orders) {
+export async function calculateTotal (client, id_orders) {
 
-    const result = await pool.query(
+    const result = await client.query(
             `UPDATE orders
             SET total_value = (
             SELECT COALESCE(SUM(amount * unit_price), 0)
