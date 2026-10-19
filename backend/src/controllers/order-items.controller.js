@@ -4,12 +4,8 @@ import {
     updateAmountTransaction } from '../services/order-items.transaction.service.js';
 import { 
     getOrderItem,
-    getOrderItems,
-    createOrderItem,
-    deleteOrderItem,
-    updateAmount,
+    getOrderItems
 } from '../services/order-items.service.js';
-import { calculateTotal } from '../services/order.service.js';
 
 export async function getOrderItemController (req, res){
     const id = Number(req.params.id);
@@ -18,12 +14,10 @@ export async function getOrderItemController (req, res){
 
     try {
         const orderItem = await getOrderItem(id);
-
-        if(!orderItem) return res.status(404).json({message: "Order Item not found"})
-
+        if(!orderItem) return res.status(404).json({message: "Order Item not found"});
         return res.status(200).json(orderItem);
-    }catch(error){
-        console.error("Error on getting Order Item", error);
+    }catch(e){
+        console.error("Error on getting Order Item", e);
 
         return res.status(500).json({
             message: "Error on getting Order Item"})
@@ -57,15 +51,23 @@ export async function createOrderItemController (req, res){
 
     try {
         const orderItem = await createOrderItemTransaction(id_orders, id_product, amount);
-        
         return res.status(201).json(orderItem);
-    }catch(error){
-        console.error("Error on creating Order Item: ", error);
-
-        return res.status(500).json({
-            message: "Error on creating Order Item"});
+    
+    }catch(e){
+        if(e.message === "ProductNotFound"){
+            return res.status(404).json({
+                message: "Product not found"
+            })
+        }
+        if(e.message === "Order item was not created"){
+            return res.status(500).json({
+                message: e.message
+            });
+        };  
+        return res.status(500).json("Internal server error");
+        };
     };
-};
+
 
 export async function deleteOrderItemController (req, res){
     const id = Number(req.params.id);
@@ -74,16 +76,20 @@ export async function deleteOrderItemController (req, res){
 
 
     try {
-        const orderItem = await deleteOrderItemTransaction(id);
-
-        if(!orderItem) return res.status(404).json({message: "Order Item not found!"})
+        await deleteOrderItemTransaction(id);
 
         return res.status(204).send();
-    }catch(error){
-        console.error("Error on deleting Order Item", error);
 
+    }catch(e){
+        if(e.message === "ItemNotFound"){
+            return res.status(404).json({
+                message:e.message
+            });
+        };
         return res.status(500).json({
-            message: "Error on deleting Order Item"});
+            message: "Error on deleting Order Item"
+        });
+        
     };
 };
 
@@ -95,14 +101,15 @@ export async function updateAmountController (req, res){
     if (!Number.isInteger(amount) || amount<= 0) return res.status(400).json({message: "The amount of items must be valid!"});
 
     try {
-        const orderItemUpdated = await updateAmount(id, amount);
-    
-        if (!orderItemUpdated) return res.status(404).json({ message: "Order Item not found" });
+        const orderItemUpdated = await updateAmountTransaction(id, amount);
         
         return res.status(200).json(orderItemUpdated);
-    }catch(error){
-        console.error("Error on updating Order Item", error);
-
+    }catch(e){
+        if(e.message === "ItemNotFound"){
+            return res.status(404).json({
+                message: e.message
+            });
+        };
         return res.status(500).json({
             message: "Error on updating Order Item"});
     };

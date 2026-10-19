@@ -1,8 +1,12 @@
-import http from "http";
+import express from "express";
+import productRoutes from "../src/routes/products.routes";
 
+const app = express();
 const PORT = 8080;
 
+app.use(express.json());
 
+app.use("/products", productRoutes);
 
 const server = http.createServer((req, res) =>{
 
@@ -14,6 +18,6 @@ const server = http.createServer((req, res) =>{
 });
 
 server.listen(PORT, ()=>{
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
 

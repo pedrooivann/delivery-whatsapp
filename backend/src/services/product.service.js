@@ -1,6 +1,6 @@
 
-export async function getProduct (id){
-    const result = await pool.query(
+export async function getProduct (client, id){
+    const result = await client.query(
         `SELECT * FROM product 
         WHERE id = $1`,
         [id]
