@@ -8,6 +8,16 @@ export async function getClient (id){
     return result.rows[0];
 };
 
+export async function getClientByTelephone(telephone) {
+    const result = await pool.query(
+        `SELECT * FROM client
+        WHERE telephone = $1
+        RETURNING *`,
+        [telephone]
+    );
+    return result.rows[0];
+};
+
 export async function getClients(){
     const result = await pool.query(
         `SELECT * FROM client;`
@@ -17,17 +27,17 @@ export async function getClients(){
 
 export async function createClient (name, telephone, addressLine1, addressLine2, neighborhood) {
     const result = await pool.query(
-        `INSERT INTO order_items (id_orders, id_product, amount, unit_price) 
-        VALUES ($1, $2, $3, $4) 
+        `INSERT INTO client (name, telephone, addressLine1, addressLine2, neighborhood) 
+        VALUES ($1, $2, $3, $4, $5) 
         RETURNING  *;`,
-        [id_orders, id_product, amount, unit_price] 
+        [name, telephone, addressLine1, addressLine2, neighborhood] 
         );
     return result.rows[0];
 };
 
-export async function deleteOrderItems (id) {
+export async function deleteClient (id) {
     const result = await pool.query(
-        `DELETE FROM order_items 
+        `DELETE FROM client 
         WHERE id = $1
         RETURNING *;`,
         [id]
@@ -35,13 +45,13 @@ export async function deleteOrderItems (id) {
     return result.rows[0];
 };
 
-export async function updateAmount (id, amount) {
+export async function updateClient (id, name, telephone, addressLine1, addressLine2, neighborhood) {
     const result = await pool.query(
-        `UPDATE order_items
-        SET amount= $2
+        `UPDATE client
+        SET name = $2, telephone = $3, addressLine1 = $4, addressLine2 = $5, neighborhood = $6
         WHERE id= $1
         RETURNING *;`,
-        [id, amount]
+        [id, name, telephone, addressLine1, addressLine2, neighborhood]
     );
     return result.rows[0];
 };

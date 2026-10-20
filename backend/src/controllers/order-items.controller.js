@@ -17,10 +17,10 @@ export async function getOrderItemController (req, res){
         if(!orderItem) return res.status(404).json({message: "Order Item not found"});
         return res.status(200).json(orderItem);
     }catch(e){
-        console.error("Error on getting Order Item", e);
-
+        console.log(e);
         return res.status(500).json({
-            message: "Error on getting Order Item"})
+            message: "Internal Server Error"
+        });
     };
 };
 
@@ -30,11 +30,12 @@ export async function getOrderItemsController (req, res){
         const orderItems = await getOrderItems();
 
         return res.status(200).json(orderItems);
-    }catch(error){
-        console.error("Error getting Order Items:", error);
+    }catch(e){
 
+        console.log(e);
         return res.status(500).json({
-            message: "Error on getting Order Items"})
+            message: "Internal Server Error"
+        });
     };
 };
 
@@ -54,19 +55,19 @@ export async function createOrderItemController (req, res){
         return res.status(201).json(orderItem);
     
     }catch(e){
+
+        console.log(e);
+
         if(e.message === "ProductNotFound"){
             return res.status(404).json({
                 message: "Product not found"
-            })
-        }
-        if(e.message === "Order item was not created"){
-            return res.status(500).json({
-                message: e.message
             });
         };  
-        return res.status(500).json("Internal server error");
-        };
+        
+        return res.status(500).json({
+            message: "Internal Server Error"});
     };
+};
 
 
 export async function deleteOrderItemController (req, res){
@@ -81,13 +82,17 @@ export async function deleteOrderItemController (req, res){
         return res.status(204).send();
 
     }catch(e){
+        
+        console.log(e);
+        
         if(e.message === "ItemNotFound"){
             return res.status(404).json({
-                message:e.message
+                message: "Item not found"
             });
         };
+
         return res.status(500).json({
-            message: "Error on deleting Order Item"
+            message: "Internal Server Error"
         });
         
     };
@@ -105,12 +110,16 @@ export async function updateAmountController (req, res){
         
         return res.status(200).json(orderItemUpdated);
     }catch(e){
+
+        console.log(e);
+
         if(e.message === "ItemNotFound"){
             return res.status(404).json({
-                message: e.message
+                message: "Item not found"
             });
         };
         return res.status(500).json({
-            message: "Error on updating Order Item"});
+            message: "Internal Server Error"
+        });
     };
 };

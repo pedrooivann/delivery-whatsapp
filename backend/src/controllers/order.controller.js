@@ -1,4 +1,5 @@
 
+import { getClient } from "../services/client.service.js";
 import {
     getOrders,
     getOrder,
@@ -13,12 +14,12 @@ export async function getOrdersController(req, res) {
         const orders = await getOrders();
 
         return res.status(200).json(orders);
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on getting Orders",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
 
 export async function getOrderController(req, res) {
@@ -26,7 +27,7 @@ export async function getOrderController(req, res) {
 
     if (!Number.isInteger(id) || id <= 0) {
         return res.status(400).json({
-            message: "The ID must be a valid value!"
+            message: "The ID must be a valid value"
         });
     }
 
@@ -40,12 +41,12 @@ export async function getOrderController(req, res) {
         }
 
         return res.status(200).json(order);
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on getting Order",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
 
 export async function createOrderController(req, res) {
@@ -56,7 +57,7 @@ export async function createOrderController(req, res) {
 
     if (!Number.isInteger(idClient) || idClient <= 0) {
         return res.status(400).json({
-            message: "The client ID must be a valid value!"
+            message: "The client ID must be a valid value"
         });
     }
 
@@ -66,29 +67,28 @@ export async function createOrderController(req, res) {
         });
     }
 
-    if (
-        delivery_address !== undefined &&
-        (typeof delivery_address !== "string" || !delivery_address.trim())
-    ) {
+    if (typeof delivery_address !== "string" || !delivery_address.trim()) {
         return res.status(400).json({
-            message: "The delivery address must be valid!"
+            message: "The delivery address must be valid"
         });
     }
 
     try {
-        const order = await createOrder(
-            idClient,
-            origin ?? "whatsapp_manual",
-            delivery_address?.trim() ?? null
-        );
+        const checkClient = await getClient(idClient);
+
+        if(!checkClient) 
+            return res.status(404).json({message: "Client does not exist"});
+
+        const order = await createOrder(idClient, origin ?? "whatsapp_manual", delivery_address.trim());
+
 
         return res.status(201).json(order);
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on creating Order",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
 
 export async function deleteOrderController(req, res) {
@@ -96,7 +96,7 @@ export async function deleteOrderController(req, res) {
 
     if (!Number.isInteger(id) || id <= 0) {
         return res.status(400).json({
-            message: "The ID must be a valid value!"
+            message: "The ID must be a valid value"
         });
     }
 
@@ -105,17 +105,17 @@ export async function deleteOrderController(req, res) {
 
         if (!order) {
             return res.status(404).json({
-                message: "Order not found!"
+                message: "Order not found"
             });
         }
 
         return res.status(204).send();
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on deleting Order",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
 
 export async function updateOrderStatusController(req, res) {
@@ -134,13 +134,13 @@ export async function updateOrderStatusController(req, res) {
 
     if (!Number.isInteger(id) || id <= 0) {
         return res.status(400).json({
-            message: "The ID must be a valid value!"
+            message: "The ID must be a valid value"
         });
     }
 
     if (typeof order_status !== "string" || !validStatuses.includes(order_status)) {
         return res.status(400).json({
-            message: "The order status must be valid!"
+            message: "The order status must be valid"
         });
     }
 
@@ -149,49 +149,45 @@ export async function updateOrderStatusController(req, res) {
 
         if (!updated) {
             return res.status(404).json({
-                message: "Order not found!"
+                message: "Order not found"
             });
         }
 
         return res.status(200).json(updated);
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on updating Order status",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
 
 export async function updateOrderAddressController(req, res) {
     const id = Number(req.params.id);
     const { delivery_address } = req.body;
 
-    if (!Number.isInteger(id) || id <= 0) {
-        return res.status(400).json({
-            message: "The ID must be a valid value!"
-        });
-    }
+    if (!Number.isInteger(id) || id <= 0) 
+        return res.status(400).json({message: "The ID must be a valid value"});
+    
 
-    if (typeof delivery_address !== "string" || !delivery_address.trim()) {
-        return res.status(400).json({
-            message: "The delivery address must be valid!"
-        });
-    }
+    if (typeof delivery_address !== "string" || !delivery_address.trim()) 
+        return res.status(400).json({ message: "The delivery address must be valid"});
+    
 
     try {
         const updated = await updateOrderAddress(id, delivery_address.trim());
 
         if (!updated) {
             return res.status(404).json({
-                message: "Order not found!"
+                message: "Order not found"
             });
         }
 
         return res.status(200).json(updated);
-    } catch (error) {
+    }catch(e){
+        console.log(e);
         return res.status(500).json({
-            error: "Error on updating Order address",
-            details: error.message
+            message: "Internal Server Error"
         });
-    }
+    };
 }
