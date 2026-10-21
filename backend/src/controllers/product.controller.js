@@ -35,7 +35,10 @@ export async function getProductsController (req, res){
 };
 
 export async function createProductController(req, res) {
-    const { name, description, price } = req.body;
+    const {idCategory, name, description, price } = req.body;
+
+    if (!Number.isInteger(idCategory) || idCategory <= 0) return res.status(400).json({message:"The Category ID must be a valid value!"});
+
 
     if (typeof name !== "string" || !name.trim()) {
         return res.status(400).json({message: "A valid name is required!"});
@@ -60,6 +63,7 @@ export async function createProductController(req, res) {
 
     try {
         const product = await createProduct(
+            idCategory,
             name.trim(),
             description.trim(),
             productPrice

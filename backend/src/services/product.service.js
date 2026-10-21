@@ -1,3 +1,4 @@
+import pool from "../database/database.js";
 
 export async function getProduct (client, id){
     const result = await client.query(
@@ -15,15 +16,18 @@ export async function getProducts(){
     return result.rows;
 };
 
-export async function createProduct (name, description, price) {
+
+export async function createProduct(idCategory, name, description, price) {
     const result = await pool.query(
-        `INSERT INTO product (name, description, price) 
-        VALUES ($1, $2, $3) 
-        RETURNING  *;`, //Query Insert
-        [name, description, price] //Parametros da Query Insert
-        );
+        `INSERT INTO product (id_category, name, description, price)
+        VALUES ($1, $2, $3, $4)
+         RETURNING *;`,
+        [idCategory, name, description, price]
+    );
+
     return result.rows[0];
 };
+
 
 export async function deleteProduct (id) {
     const result = await pool.query(

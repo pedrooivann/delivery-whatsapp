@@ -15,6 +15,6 @@ router.get("/", getClientsController );
 router.get("/clients/telephone", getClientByTelephoneController);
 router.post("/", createClientController);
 router.delete("/:id", deleteClientController);
-router.updateClientController("/:id", updateClientController);
+router.put("/:id", updateClientController);
 
 export default router;

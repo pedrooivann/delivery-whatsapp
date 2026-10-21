@@ -1,3 +1,4 @@
+import pool from "../database/database.js";
 
 export async function getClient (id){
     const result = await pool.query(

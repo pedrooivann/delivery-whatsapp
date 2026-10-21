@@ -1,3 +1,4 @@
+import pool from "../database/database.js";
 
 export async function getOrders (){
     const result = await pool.query(

@@ -4,7 +4,7 @@ import {
     deleteOrderItem,
     updateAmount } from "./order-items.service.js";
 import { calculateTotal} from "./order.service.js";
-import { pool } from "../database/database.js"
+import pool from "../database/database.js"
 
 
 
