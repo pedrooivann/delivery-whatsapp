@@ -26,12 +26,12 @@ export async function getClients(){
     return result.rows;
 };
 
-export async function createClient (name, telephone, addressLine1, addressLine2, neighborhood) {
+export async function createClient (name, telephone, address_line1, address_line2, neighborhood) {
     const result = await pool.query(
-        `INSERT INTO client (name, telephone, addressLine1, addressLine2, neighborhood) 
+        `INSERT INTO client (name, telephone, address_line1, address_line2, neighborhood) 
         VALUES ($1, $2, $3, $4, $5) 
         RETURNING  *;`,
-        [name, telephone, addressLine1, addressLine2, neighborhood] 
+        [name, telephone, address_line1, address_line2, neighborhood] 
         );
     return result.rows[0];
 };
@@ -46,13 +46,13 @@ export async function deleteClient (id) {
     return result.rows[0];
 };
 
-export async function updateClient (id, name, telephone, addressLine1, addressLine2, neighborhood) {
+export async function updateClient (id, name, telephone, address_line1, address_line2, neighborhood) {
     const result = await pool.query(
         `UPDATE client
-        SET name = $2, telephone = $3, addressLine1 = $4, addressLine2 = $5, neighborhood = $6
+        SET name = $2, telephone = $3, address_line1 = $4, address_line2 = $5, neighborhood = $6
         WHERE id= $1
         RETURNING *;`,
-        [id, name, telephone, addressLine1, addressLine2, neighborhood]
+        [id, name, telephone, address_line1, address_line2, neighborhood]
     );
     return result.rows[0];
 };

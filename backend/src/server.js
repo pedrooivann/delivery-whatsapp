@@ -15,6 +15,7 @@ app.use("/products", productRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/orders", orderRoutes);
 app.use("/clients", clientRoutes);
+app.use("/orders/:id_order/items", orderItemsRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

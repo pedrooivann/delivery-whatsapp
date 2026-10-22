@@ -69,15 +69,15 @@ export async function getClientByTelephoneController (req, res) {
 };
 
 export async function createClientController (req, res) {
-    const {name, telephone, addressLine1, addressLine2, neighborhood} = req.body;
+    const {name, telephone, address_line1, address_line2, neighborhood} = req.body;
 
     if (typeof name !== "string" || !name.trim()) 
         return res.status(400).json({message: "A valid name is required"});
     
-    if (typeof addressLine1 !== "string" || !addressLine1.trim()) 
+    if (typeof address_line1 !== "string" || !address_line1.trim()) 
         return res.status(400).json({message: "The first address information must be valid"});
 
-    if (typeof addressLine2 !== "string" || !addressLine2.trim()) 
+    if (typeof address_line2 !== "string" || !address_line2.trim()) 
         return res.status(400).json({message: "The second address information must be valid"});
 
     if (typeof neighborhood !== "string" || !neighborhood.trim()) 
@@ -91,8 +91,8 @@ export async function createClientController (req, res) {
         const client = await createClient(
             name.trim(), 
             telephone.trim(), 
-            addressLine1.trim(), 
-            addressLine2.trim(), 
+            address_line1.trim(), 
+            address_line2.trim(), 
             neighborhood.trim());
         return res.status(201).json(client);
     }catch(e){
@@ -125,7 +125,7 @@ export async function deleteClientController (req, res) {
 
 export async function updateClientController (req, res){
     const id = Number(req.params.id);
-    const {name, telephone, addressLine1, addressLine2, neighborhood} = req.body;
+    const {name, telephone, address_line1, address_line2, neighborhood} = req.body;
 
     if (!Number.isInteger(id) || id <= 0) 
         return res.status(400).json({message:"The ID must be a valid value"});
@@ -133,10 +133,10 @@ export async function updateClientController (req, res){
     if (typeof name !== "string" || !name.trim()) 
         return res.status(400).json({message: "A valid name is required"});
     
-    if (typeof addressLine1 !== "string" || !addressLine1.trim()) 
+    if (typeof address_line1 !== "string" || !address_line1.trim()) 
         return res.status(400).json({message: "The first address information must be valid"});
     
-    if (typeof addressLine2 !== "string" || !addressLine2.trim()) 
+    if (typeof address_line2 !== "string" || !address_line2.trim()) 
         return res.status(400).json({message: "The second address information must be valid"});
     
     if (typeof neighborhood !== "string" || !neighborhood.trim()) 
@@ -151,8 +151,8 @@ export async function updateClientController (req, res){
             id, 
             name.trim(), 
             telephone.trim(), 
-            addressLine1.trim(), 
-            addressLine2.trim(),
+            address_line1.trim(), 
+            address_line2.trim(),
             neighborhood.trim()
         );
 

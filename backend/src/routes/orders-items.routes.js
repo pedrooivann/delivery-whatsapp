@@ -4,16 +4,19 @@ import {
     getOrderItemsController,
     createOrderItemController,
     deleteOrderItemController,
-    updateAmountController
+    updateAmountController,
+    updateOrderItemController
 } from "../controllers/order-items.controller.js";
 
-const router = Router();
+const router = Router({mergeParams: true});
 
 router.get("/", getOrderItemsController);
 router.get("/:id", getOrderItemController);
 router.post("/", createOrderItemController);
 router.delete("/:id", deleteOrderItemController);
-router.put("/:id", updateAmountController);
+router.patch("/:id", updateOrderItemController);
+router.patch("/:id/amount", updateAmountController);
+
 
 export default router;
 

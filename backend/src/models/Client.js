@@ -1,9 +1,9 @@
 class Client {
-    constructor(name, telephone, addressLine1, addressLine2, neighborhood){
+    constructor(name, telephone, address_line1, address_line2, neighborhood){
         this.name = name;
         this.telephone = telephone;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
+        this.address_line1 = address_line1;
+        this.address_line2 = address_line2;
         this.neighborhood = neighborhood
     }
 }

@@ -67,3 +67,4 @@ CREATE TABLE order_items (
         REFERENCES product(id) ON DELETE RESTRICT
 );
 ```
+ALTER TABLE orders ALTER COLUMN delivery_address TYPE character varying(200);
