@@ -30,43 +30,45 @@ export async function getClientController (req, res) {
     };
 };
 
-export async function getClientsController (req, res) {
+export async function getClientsController(req, res) {
 
-    try{
+    const { telephone } = req.query;
+
+    try {
+        if (telephone !== undefined) {
+            if (typeof telephone !== "string" || !telephone.trim()) {
+                return res.status(400).json({
+                    message: "The telephone must be valid"
+                });
+            }
+
+            const client = await getClientByTelephone(telephone.trim());
+
+
+
+            if (!client) {
+                return res.status(404).json({
+                    message: ""
+                });
+            }
+
+            return res.status(200).json({ client });
+        }
+
         const clients = await getClients();
 
-        return res.status(200).json({
-            clients: clients
-        });
-    }catch(e){
-        console.log(e);
+        return res.status(200).json({ clients });
+
+    } catch (e) {
+        console.error(e);
+
         return res.status(500).json({
             message: "Internal Server Error"
         });
     }
-};
-
-export async function getClientByTelephoneController (req, res) {
-    const telephone = req.body.telephone;
-
-    if (typeof telephone !== "string" || !telephone.trim()) 
-        return res.status(400).json({message: "The telephone must be valid"});
+}
 
 
-    try{
-        const client = await getClientByTelephone(telephone.trim());
-        
-        if(!client) return res.status(404).json({message: "Client not found"});
-        
-        return res.status(200).json({
-            client: client});
-    }catch(e){
-        console.log(e);
-        return res.status(500).json({
-            message: "Internal Server Error"
-        });
-    };
-};
 
 export async function createClientController (req, res) {
     const {name, telephone, address_line1, address_line2, neighborhood} = req.body;

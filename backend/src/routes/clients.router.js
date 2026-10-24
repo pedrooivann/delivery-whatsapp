@@ -2,7 +2,6 @@ import {Router} from "express";
 import {
     getClientController,
     getClientsController,
-    getClientByTelephoneController,
     createClientController,
     deleteClientController,
     updateClientController
@@ -10,9 +9,10 @@ import {
 
 const router = Router();
 
+router.get("/", getClientsController);
+
 router.get("/:id", getClientController);
-router.get("/", getClientsController );
-router.get("/clients/telephone", getClientByTelephoneController);
+
 router.post("/", createClientController);
 router.delete("/:id", deleteClientController);
 router.put("/:id", updateClientController);

@@ -15,7 +15,7 @@ export async function getProductController (req, res){
 
         if(!product) return res.status(404).json({message: "Product not found"})
 
-        return res.status(200).json(product);
+        return res.status(200).json({product: product});
     }catch(e){
         console.log(e)
         return res.status(500).json({message: "Internal Server Error"});
@@ -27,7 +27,7 @@ export async function getProductsController (req, res){
     try {
         const products = await getProducts();
 
-        return res.status(200).json(products);
+        return res.status(200).json({products: products});
     }catch(e){
         console.log(e)
         return res.status(500).json({message: "Internal Server Error"});
@@ -35,9 +35,9 @@ export async function getProductsController (req, res){
 };
 
 export async function createProductController(req, res) {
-    const {idCategory, name, description, price } = req.body;
+    const {id_category, name, description, price } = req.body;
 
-    if (!Number.isInteger(idCategory) || idCategory <= 0) return res.status(400).json({message:"The Category ID must be a valid value!"});
+    if (!Number.isInteger(id_category) || id_category <= 0) return res.status(400).json({message:"The Category ID must be a valid value!"});
 
 
     if (typeof name !== "string" || !name.trim()) {
@@ -62,12 +62,7 @@ export async function createProductController(req, res) {
     }
 
     try {
-        const product = await createProduct(
-            idCategory,
-            name.trim(),
-            description.trim(),
-            productPrice
-        );
+        const product = await createProduct( id_category, name.trim(), description.trim(), productPrice);
 
         return res.status(201).json(product);
     } catch (e) {

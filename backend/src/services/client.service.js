@@ -12,8 +12,7 @@ export async function getClient (id){
 export async function getClientByTelephone(telephone) {
     const result = await pool.query(
         `SELECT * FROM client
-        WHERE telephone = $1
-        RETURNING *`,
+        WHERE telephone = $1`,
         [telephone]
     );
     return result.rows[0];
