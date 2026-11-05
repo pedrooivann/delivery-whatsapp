@@ -1,0 +1,90 @@
+
+
+.client-card {
+    width: 80%;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    gap: 16px;
+    padding: 10px 50px;
+    min-height: 120px;
+    background-color: var(--bg-tertiary);
+    justify-content: space-between;
+}
+
+
+.personal-info {
+    width: auto;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.name-h3 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: var(--text-primary);
+}
+
+.telephone-h3 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-secondary);
+
+}
+
+.info-div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.address-div {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-primary);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.address-reference {
+    color: var(--text-secondary);
+}
+
+.button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-btn {
+    border: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+}
+
+.client-btn-icon {
+    width: 50px;
+    height: 50px;
+    stroke: var(--text-primary);
+    
+}
+
+@media screen and (max-width: 768px){
+
+    
+    .client-card {
+        padding: 0px 25px;
+    }
+
+    .personal-info {
+
+        grid-template-columns: 1fr;
+    }
+
+    .address-div {
+        display: none
+    }
+};

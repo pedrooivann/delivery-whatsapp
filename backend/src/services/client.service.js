@@ -20,7 +20,8 @@ export async function getClientByTelephone(telephone) {
 
 export async function getClients(){
     const result = await pool.query(
-        `SELECT * FROM client;`
+        `SELECT * FROM client
+        ORDER BY name ASC;`
     );
     return result.rows;
 };
