@@ -14,12 +14,10 @@ function App() {
 
   return (
     <>
-    <Header/>
 
 
     <div className='layout dark'>
 
-    <Sidebar/>
     
       <main >
         <Routes>

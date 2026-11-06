@@ -1,0 +1,34 @@
+
+.client-info-main-container {
+    margin: 30px auto;
+    width: 80%;
+}
+
+
+
+.client-info-main-container p {
+    height: 20px;
+}
+
+.client-info-input {
+    height: 100%;
+    font-size: 1.2rem;
+    font-weight: 500;
+    width: 90%;
+    border: none;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.info-container {
+    height: 30px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    color: var(--text-secondary);
+}
+.info-container p {
+    height: 100%;
+    width: 150px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}

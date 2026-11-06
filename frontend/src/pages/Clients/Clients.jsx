@@ -2,6 +2,8 @@ import getClients from '../../services/clientsService.js';
 import { useState, useEffect } from 'react';
 import ClientCard from '../../components/ClientCard/ClientCard.jsx';
 import ClientSearchBar from '../../components/ClientSearchBar/ClientSearchBar.jsx';
+import Sidebar from '../../components/Sidebar/Sidebar.jsx';
+import Header from '../../components/Header/Header.jsx';
 
 import './Clients.css'
 
@@ -39,24 +41,39 @@ function Clients (){
 
 
     return (
-    <section className="clients-list">
+    
+    <>
+        <div className='outer-layout'>
+            <Header></Header>
 
-        <ClientSearchBar
-            search={search}
-            setSearch={setSearch}
-            sort = {sort}
-            setSort = {setSort}
-        />
+            <div className='layout'>
+                <Sidebar></Sidebar>
+                
+                <section className="clients-list">
 
-        <hr />
+                    <ClientSearchBar
+                        search={search}
+                        setSearch={setSearch}
+                        sort = {sort}
+                        setSort = {setSort}
+                    />
 
-        {sortedClients.map((client) => (
-            <ClientCard
-                key={client.id_client}
-                client={client}
-            />
-        ))}
-    </section>
+                    <hr />
+
+                    
+
+                    {sortedClients.map((client) => (
+                        <ClientCard
+                            key={client.id}
+                            client={client}
+                        />
+                        
+                    ))}
+                    
+                </section>
+            </div>
+        </div>
+    </>
 );
 
 }

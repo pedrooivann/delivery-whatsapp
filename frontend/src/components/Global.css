@@ -67,9 +67,16 @@ textarea {
 
 }
 
+.outer-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+}
+
 .layout {
     display: flex;
-    height: calc(100vh - 70px);
     background-color: var(--bg-primary);
 
 }

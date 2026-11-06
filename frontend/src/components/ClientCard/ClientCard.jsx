@@ -1,11 +1,17 @@
 import { useState } from "react";
 import './ClientCard.css'
 import {SquarePen } from 'lucide-react'
+import ClientInfoModal from "../ClientInfoModal/ClientInfoModal";
 
 function ClientCard ({client}){
 
+    const [selectedClient, setSelectedClient] = useState();
+
     return(
         <>
+
+        {selectedClient && <ClientInfoModal onClose={()=>setSelectedClient(false)} client={client}/>}
+
         <div className="client-card dark">
             
             <div className="personal-info">
@@ -23,7 +29,9 @@ function ClientCard ({client}){
             </div>
             
             <div className="button-div">
-                <button className="client-btn">
+                <button className="client-btn"
+                onClick={()=>{setSelectedClient(client)}}
+                >
                     <SquarePen className="client-btn-icon"/>
                 </button>
             </div>
