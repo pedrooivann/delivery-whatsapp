@@ -1,4 +1,4 @@
-import getClients from '../../services/clientsService.js';
+import {getClients, deleteClient} from '../../services/clientsService.js';
 import { useState, useEffect } from 'react';
 import ClientCard from '../../components/ClientCard/ClientCard.jsx';
 import ClientSearchBar from '../../components/ClientSearchBar/ClientSearchBar.jsx';
@@ -23,7 +23,17 @@ function Clients (){
     } else {
         return b.name.localeCompare(a.name);
     }
-});
+    });
+
+    async function handleDelete (id) {
+        try {
+            await deleteClient(id);    
+            setClients((prevClients)=> prevClients.filter(client => client.id !== id));
+                
+        }catch(e){
+                console.error(e);
+            }
+        }   
 
     useEffect(()=>{
         async function loadClients(){
@@ -37,6 +47,7 @@ function Clients (){
 
         loadClients();
     }, []) 
+    
     
 
 
@@ -58,7 +69,7 @@ function Clients (){
                         setSort = {setSort}
                     />
 
-                    <hr />
+                    <hr className='client-list-hr'/>
 
                     
 
@@ -66,6 +77,7 @@ function Clients (){
                         <ClientCard
                             key={client.id}
                             client={client}
+                            handleDelete={handleDelete}
                         />
                         
                     ))}

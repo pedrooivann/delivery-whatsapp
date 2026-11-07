@@ -12,7 +12,22 @@ async function getClients (){
     return data;
 }
 
-export default getClients;
+
+
+async function deleteClient (id) {
+    const response = await fetch(`${API_URL}/clients/${id}`, {
+        method: 'DELETE'
+    });
+
+    if(!response.ok){
+        throw new Error ("Couldn't delete Client");
+    }
+
+    const data = response.json();
+    return data;
+}
+
+export {getClients, deleteClient};
 
 
 

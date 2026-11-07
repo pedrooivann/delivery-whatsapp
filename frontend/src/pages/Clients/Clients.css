@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.clients-list hr {
+.client-list-hr {
     width: 80%;
     background-color: var(--text-secondary);
     border: none;
