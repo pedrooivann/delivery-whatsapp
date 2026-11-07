@@ -2,15 +2,18 @@ import './ClientSearchbar.css';
 import { ArrowDownAZ, ArrowDownZA } from 'lucide-react';
 import Modal from '../Modal/Modal.jsx';
 import { useState } from 'react';
+import CreateClientModal from '../CreateClientModal/CreateClientModal.jsx';
 
-function ClientSearchBar ({search, setSearch, setSort}) {
+function ClientSearchBar ({search, setSearch, setSort, onCreate}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         
     <>
-        {isModalOpen && <Modal onClose ={()=> setIsModalOpen(false)}/>}
+        {isModalOpen && <CreateClientModal 
+        onClose ={()=> setIsModalOpen(false)}
+        onCreate={onCreate}/>}
 
         <div className='searchbar-div'>
 

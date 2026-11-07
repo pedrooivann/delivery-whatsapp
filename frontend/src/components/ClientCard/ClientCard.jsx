@@ -14,6 +14,7 @@ function ClientCard ({client, handleDelete}){
         onClose={()=>setSelectedClient(false)} 
         client={client}
         onDelete={handleDelete}
+
         />}
 
         <div className="client-card dark">

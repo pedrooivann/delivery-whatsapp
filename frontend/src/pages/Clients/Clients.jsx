@@ -1,4 +1,4 @@
-import {getClients, deleteClient} from '../../services/clientsService.js';
+import {getClients, deleteClient, createClient} from '../../services/clientsService.js';
 import { useState, useEffect } from 'react';
 import ClientCard from '../../components/ClientCard/ClientCard.jsx';
 import ClientSearchBar from '../../components/ClientSearchBar/ClientSearchBar.jsx';
@@ -24,6 +24,15 @@ function Clients (){
         return b.name.localeCompare(a.name);
     }
     });
+
+    async function handleCreate(name, telephone, addressLine1, addressLine2, neighborhood){
+        try {
+            const newClient = await createClient(name, telephone, addressLine1, addressLine2, neighborhood);
+            setClients((clients)=>[...clients, newClient]);
+        }catch(e){
+            console.error(e)
+        }
+    }
 
     async function handleDelete (id) {
         try {
@@ -67,6 +76,7 @@ function Clients (){
                         setSearch={setSearch}
                         sort = {sort}
                         setSort = {setSort}
+                        onCreate={handleCreate}
                     />
 
                     <hr className='client-list-hr'/>
