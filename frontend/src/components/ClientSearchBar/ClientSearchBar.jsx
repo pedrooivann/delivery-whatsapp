@@ -17,23 +17,22 @@ function ClientSearchBar ({search, setSearch, setSort, onCreate}) {
 
         <div className='searchbar-div'>
 
-            <div id='left-container'>    
+            <div class='left-container'>    
                 <input 
-                id='search'
                 type="text" 
-                className='searchbar'
+                className='searchbar search'
                 placeholder='Search for clients...'
                 onChange={(event)=> setSearch(event.target.value)}
                 value={search}
                 />
 
-                <button id='index-az-button' className='search-index-button' onClick={()=>setSort("AZ")}><ArrowDownAZ className='search-index-icon'/></button>
-                <button id='index-za-button' className='search-index-button' onClick={()=>setSort("ZA")}><ArrowDownZA className='search-index-icon'/></button>
+                <button className='search-index-button index-az-button' onClick={()=>setSort("AZ")}><ArrowDownAZ className='search-index-icon'/></button>
+                <button className='search-index-button index-za-button' onClick={()=>setSort("ZA")}><ArrowDownZA className='search-index-icon'/></button>
             </div>
 
-            <div id='right-container'>
+            <div className='right-container'>
                 <button 
-                    id='create-client' 
+                    className='create-button' 
                     onClick={()=>{setIsModalOpen(true)}}
                     >Create client</button>
             </div>    

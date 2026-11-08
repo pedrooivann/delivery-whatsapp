@@ -6,16 +6,23 @@
     grid-template-columns: 4fr 1fr;
     width: 80%;
     height: 70px;
-    margin-top: 40px;
+    margin: 40px auto;
+
+    border: 1px solid red;
 }
 
-#left-container {
+.left-container {
     display: flex;
     align-items: center;
+
+    border: 1px solid red;
 }
 
 
-#search {
+.search {
+
+    border: 1px solid red;
+
     width: 300px;
     padding-left: 10px;
     border-radius: 5px;
@@ -42,10 +49,9 @@
     height: 40px;
 }
 
-#right-container {
-}
 
-#create-client {
+
+.create-button {
     color: var(--text-primary);
     background-color: rgb(75, 75, 255);
     font-weight: bolder;
@@ -59,7 +65,7 @@
 
 @media screen and (max-width: 480px) {
 
-    #search {
+    .search {
         width: 220px;
     }
 

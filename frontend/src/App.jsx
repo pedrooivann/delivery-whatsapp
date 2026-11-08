@@ -1,11 +1,9 @@
-//import './App.css'
-import Header from "./components/Header/Header.jsx";
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
+
 import './components/Global.css'
 import { Route, Routes } from 'react-router-dom';
 
-import Orders from './pages/Orders.jsx';
-import Products from './pages/Products.jsx';
+import Orders from './pages/Orders/Orders.jsx';
+import Products from './pages/Products/Products.jsx';
 import Clients  from './pages/Clients/Clients.jsx';
 
 import './components/Global.css'
