@@ -1,4 +1,4 @@
-import Modal from "../Modal/Modal.jsx"
+import Modal from "../../Modal/Modal.jsx";
 import ClientInfo from "./ClientInfo.jsx";
 
 function ClientInfoModal ({onClose, client, onDelete, onCreate}){
@@ -7,9 +7,9 @@ function ClientInfoModal ({onClose, client, onDelete, onCreate}){
             <Modal 
             onClose={onClose}
             title={"Client Information"}>
+
                 <ClientInfo 
                 client={client}
-                onDelete={onDelete}
                 />
             </Modal>
         </>

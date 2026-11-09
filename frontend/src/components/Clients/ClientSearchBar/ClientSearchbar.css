@@ -1,0 +1,43 @@
+
+
+.search-index-button {
+    width: 40px;
+    height: 40px;
+    margin-left: 20px ;
+    background-color: transparent;
+    border: none;
+}
+
+.search-index-icon {
+    color: var(--text-primary);
+    transition: 0.5s;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+
+    .search {
+        width: 220px;
+    }
+
+    .searchbar-div {
+        grid-template-columns: 2fr;
+        gap: 20px;
+        margin-bottom: 50px;
+    }
+
+    .search-index-button {
+        width: 30px;
+        height: 30px;
+        margin-left: px;
+    }
+    .search-index-icon {
+        width: 30px;
+        height: 30px;
+    }
+}

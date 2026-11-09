@@ -1,0 +1,14 @@
+.content-section {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+}
+
+.content-section-main-hr {
+    width: 80%;
+    background-color: var(--text-secondary);
+    border: none;
+    height: 2px;
+}

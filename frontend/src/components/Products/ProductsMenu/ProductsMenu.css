@@ -1,0 +1,17 @@
+
+
+.products-menu-container {
+    width: 80%;
+    border: 1px solid magenta;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: flex-start;
+}
+
+.nav-buttons {
+    width: 50% ;
+    border: none;
+    background-color: var(--bg-primary);
+    
+}

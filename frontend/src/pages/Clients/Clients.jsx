@@ -1,7 +1,7 @@
 import {getClients, deleteClient, createClient} from '../../services/clientsService.js';
 import { useState, useEffect } from 'react';
-import ClientCard from '../../components/ClientCard/ClientCard.jsx';
-import ClientSearchBar from '../../components/ClientSearchBar/ClientSearchBar.jsx';
+import ClientCard from '../../components/Clients/ClientCard/ClientCard.jsx';
+import ClientSearchBar from '../../components/Clients/ClientSearchBar/ClientSearchBar.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import Header from '../../components/Header/Header.jsx';
 
@@ -69,7 +69,7 @@ function Clients (){
             <div className='layout'>
                 <Sidebar></Sidebar>
                 
-                <section className="clients-list">
+                <section className="content-section">
 
                     <ClientSearchBar
                         search={search}
@@ -79,7 +79,7 @@ function Clients (){
                         onCreate={handleCreate}
                     />
 
-                    <hr className='client-list-hr'/>
+                    <hr className='content-section-main-hr'/>
 
                     
 

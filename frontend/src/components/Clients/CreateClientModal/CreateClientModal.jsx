@@ -1,4 +1,4 @@
-import Modal from "../Modal/Modal.jsx";
+import Modal from '../../Modal/Modal.jsx';
 import CreateClient from './CreateClient.jsx';
 
 function CreateClientModal ({onClose, onCreate}){
