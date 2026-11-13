@@ -1,7 +1,7 @@
 import Modal from "../../Modal/Modal.jsx";
 import ClientInfo from "./ClientInfo.jsx";
 
-function ClientInfoModal ({onClose, client, onDelete, onCreate}){
+function ClientInfoModal ({onClose, client, onDelete, onUpdate}){
     return (
         <>
             <Modal 
@@ -10,6 +10,8 @@ function ClientInfoModal ({onClose, client, onDelete, onCreate}){
 
                 <ClientInfo 
                 client={client}
+                onDelete={onDelete}
+                onUpdate={onUpdate}
                 />
             </Modal>
         </>

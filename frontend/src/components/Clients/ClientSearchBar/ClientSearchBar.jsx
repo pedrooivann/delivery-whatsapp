@@ -7,7 +7,7 @@ import '../../SearchBar/SearchBar.css';
 
 import CreateClientModal from '../CreateClientModal/CreateClientModal.jsx';
 
-function ClientSearchBar({ search, setSearch, setSort, onCreate }) {
+function ClientSearchBar({ search, setSearch, setSort, onCreate, onDelete }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 

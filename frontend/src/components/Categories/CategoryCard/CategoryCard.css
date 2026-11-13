@@ -1,0 +1,42 @@
+
+.category-card {
+    height: 60px;
+    width: 40%;
+    min-width: 300px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    display: grid;
+    grid-template-columns: 7fr 2fr;
+    margin-top: 20px;
+}
+
+.category-left-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-right-container {
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-card-button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.category-card-button:hover{
+    background-color: var(--bg-hover);
+}
+
+.category-card-button-icon {
+    color: var(--text-primary);
+    width: 32px;
+    height: 32px;
+}

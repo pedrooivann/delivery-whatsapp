@@ -2,16 +2,30 @@
 
 .products-menu-container {
     width: 80%;
-    border: 1px solid magenta;
     display: flex;
     flex-direction: row;
     height: 50px;
     justify-content: flex-start;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--bg-secondary);
 }
 
 .nav-buttons {
+    font-size: 1.5em;
     width: 50% ;
     border: none;
     background-color: var(--bg-primary);
+    color: var(--text-primary);
     
+    
+}
+
+.selected-color {
+    background-color: var(--bg-secondary);
+}
+
+.not-selected-color {
+    background-color: var(--bg-primary);
 }

@@ -1,0 +1,9 @@
+.product-list-section {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
+    justify-content: center;
+    gap: 20px;
+}
+
+/**repeat(auto-fit, minmax(400px, 3fr))

@@ -3,7 +3,7 @@ import './ClientCard.css'
 import {SquarePen } from 'lucide-react'
 import ClientInfoModal from "../ClientInfoModal/ClientInfoModal";
 
-function ClientCard ({client, handleDelete}){
+function ClientCard ({client, handleDelete,  handleUpdate}){
 
     const [selectedClient, setSelectedClient] = useState();
 
@@ -14,6 +14,7 @@ function ClientCard ({client, handleDelete}){
         onClose={()=>setSelectedClient(false)} 
         client={client}
         onDelete={handleDelete}
+        onUpdate={handleUpdate}
 
         />}
 

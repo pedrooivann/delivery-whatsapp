@@ -1,26 +1,43 @@
 import { useEffect, useState } from 'react';
-import productsService from '../../../services/productsService.js';
+import getProducts from '../../../services/productsService.js';
+import ProductCard from '../ProductCard/ProductCard.jsx';
+import './ProductList.css';
+
 function ProductList () {
 
-    const [products, setProducts] = ([])
+    const [products, setProducts] = useState([])
 
-    useEffect({})
+                console.log(products)
 
-
-    async function getProducts () {
-        try{
-
-        }catch(e){
-
+    
+    useEffect(()=>{
+        async function loadProducts(){
+            try {
+                const data = await getProducts();
+                setProducts(data.products);
+            }catch(e){
+                console.error(e)
+            }
         }
-    }
+        loadProducts()
+    }, []);
+
+
 
     return (<>
 
-        {products.map({
+        <section className='product-list-section'>
 
-        })}
-    
+            {products.map((product)=>(
+                
+                
+                <ProductCard
+                    key={product.id}
+                    product={product}
+                    
+                />
+            ))}
+        </section>
     </>)
 }
 

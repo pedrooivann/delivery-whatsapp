@@ -23,13 +23,15 @@
 }
 
 .client-info-input {
+    padding-top: 3px;
     padding-left: 15px;
-    height: 30px;
+    height: 35px;
     width: 100%;
     background-color: transparent;
     color: var(--text-primary);
     border: none;
     font-size: 1.2rem;
+    border-radius: 5px;
 }
 
 .info-header {
@@ -46,13 +48,18 @@
     justify-content: space-between;
 }
 
+.client-buttons-container button {
+    height: 35px;
+    border-radius: 5px;
+    color: var(--text-primary);
+    border: none;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
 
 .delete-client-button {
     background-color: transparent;
-    width: 35px;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
 }
 
 .delete-client-icon {
@@ -63,16 +70,21 @@
 }
 
 .edit-client-button {
-    width: 70px;
-    height: 35px;
-    border: none;
     box-shadow: 0 5px 16px 0 rgba(0,0,0,0.6);
-    border-radius: 5px;
-    color: var(--text-primary);
+    width: 70px;
+    border: none;
     background-color: var(--bg-primary);
 }
 
+.submit-button {
+    background-color: rgb(63, 199, 0);
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.6);
+    width: 150px;
+}    
 
+.is-editing-input {
+    border: 1px solid rgb(63, 199, 0);
+}
 
 textarea.client-info-input {
     resize: none;

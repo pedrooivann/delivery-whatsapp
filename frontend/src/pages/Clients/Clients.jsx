@@ -1,5 +1,12 @@
-import {getClients, deleteClient, createClient} from '../../services/clientsService.js';
+import {
+    getClients, 
+    deleteClient, 
+    createClient, 
+    editClient
+} from '../../services/clientsService.js';
+
 import { useState, useEffect } from 'react';
+
 import ClientCard from '../../components/Clients/ClientCard/ClientCard.jsx';
 import ClientSearchBar from '../../components/Clients/ClientSearchBar/ClientSearchBar.jsx';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
@@ -25,6 +32,19 @@ function Clients (){
     }
     });
 
+    useEffect(()=>{
+        async function loadClients(){
+            try {
+                const data = await getClients();
+                setClients(data.clients);
+            }catch(e){
+                console.error(e)
+            };
+    };
+
+        loadClients();
+    }, []) 
+
     async function handleCreate(name, telephone, addressLine1, addressLine2, neighborhood){
         try {
             const newClient = await createClient(name, telephone, addressLine1, addressLine2, neighborhood);
@@ -44,18 +64,22 @@ function Clients (){
             }
         }   
 
-    useEffect(()=>{
-        async function loadClients(){
-            try {
-                const data = await getClients();
-                setClients(data.clients);
-            }catch(e){
-                console.error(e)
-            };
-        };
+    async function handleUpdate(id, updatedClient) {
+        try {
+            console.log("Dados enviados:", updatedClient);
 
-        loadClients();
-    }, []) 
+            const editedClient = await editClient(id, updatedClient);
+
+            console.log("Resposta da API:", editedClient);
+            
+            setClients(list=> list.map(client=>client.id  === id? editedClient : client
+            ));
+            
+        }catch(e){
+            console.error(e);
+        }
+    }
+
     
     
 
@@ -71,7 +95,7 @@ function Clients (){
                 
                 <section className="content-section">
 
-                    <ClientSearchBar
+                    <ClientSearchBar 
                         search={search}
                         setSearch={setSearch}
                         sort = {sort}
@@ -88,6 +112,7 @@ function Clients (){
                             key={client.id}
                             client={client}
                             handleDelete={handleDelete}
+                            handleUpdate={handleUpdate}
                         />
                         
                     ))}

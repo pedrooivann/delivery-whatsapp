@@ -35,3 +35,6 @@ function ProductInfo ({product}) {
     
     </>)
 }
+
+
+export default ProductInfo;

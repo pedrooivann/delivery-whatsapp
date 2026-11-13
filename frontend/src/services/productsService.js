@@ -2,7 +2,7 @@ import API_URL from "./api";
 
 async function getProducts () {
     try{
-        const response = await fetch (`${API_URL}/clients`);
+        const response = await fetch (`${API_URL}/products`);
 
         if(!response.ok){
             throw new Error ("Couldn't get Clients");
@@ -16,3 +16,7 @@ async function getProducts () {
         console.error(e);
     }
 }
+
+
+
+export default getProducts;
