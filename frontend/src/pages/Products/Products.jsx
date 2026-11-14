@@ -87,7 +87,9 @@ function Products (){
     async function handleUpdateCategory (id, name){
         try {
             const editedCategory = await updateCategory(id, name);
-            setCategories(categories.map(category => category.id === id ? editedCategory : category))
+            setCategories(categories.map(category => 
+                category.id === id ? editedCategory : category
+            ))
         } catch (e) {
             console.error(e)
         }

@@ -1,5 +1,5 @@
 
-.cat-info-container {
+.cat-create-container {
     display: grid;
     grid-template-columns: 3fr 1.5fr;
     row-gap: 0px;

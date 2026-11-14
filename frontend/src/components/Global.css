@@ -33,7 +33,6 @@ input,
 select,
 textarea {
     font: inherit;
-    padding-left: 10px;
 }
 
 
@@ -93,9 +92,30 @@ main {
 
 /*General styles*/
 
+.general-button {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.6);
+    transition: 0.3s;
+    cursor: pointer;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    transform: 0.3s;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.general-info-input {
+    background-color: var(--bg-surface);
+    border: none;
+    color: var(--text-primary);
+    height: 40px;
+
+}
+
 .general-input {
     padding: 10px 12px;
-    font-size: 14px;
     height: 40px;
     background-color: var(--bg-secondary);
     border: none;
@@ -111,17 +131,45 @@ main {
 }
 
 .general-commit-button {
-    height: 35px;
-    color: var(--text-primary);
-    border: none;
     background-color: var(--bg-button-commit);
-    border-radius: 5px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.6);
-    transition: 0.3s;
 }
 .general-commit-button:hover{
-    transform: scale(1.01);
+    transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(75, 75, 255, 0.25);
 }
+
+.general-grey-button {
+    background-color: grey;
+}
+.general-grey-button:hover {
+    transform: scale(1.05);
+}
+
+
+
+/*Save btn*/
+.general-save-button {
+    background-color: #16A34A;
+}
+.general-save-button:hover {
+    transform: scale(1.05);
+}
+
+
+
+
+/*Trash Btn*/
+
+.general-trash-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 77, 77);
+    transition: 0.3s;
+}
+.trash-icon {
+    transition: 0.3s;
+}
+.trash-icon:hover {
+    stroke-width: 3px;
+}
+

@@ -7,7 +7,7 @@ function CreateCategory ({onCreate, onClose}){
 
     return(<>
         <div >
-            <form className="cat-info-container"
+            <form className="cat-create-container"
                 onSubmit={async (e)=>{
                     e.preventDefault();
                     await onCreate(name);
@@ -26,6 +26,7 @@ function CreateCategory ({onCreate, onClose}){
 
                 <button 
                     className='
+                    general-button
                     general-commit-button 
                     create-cat-button'
                     type='submit'>Create category</button>

@@ -15,6 +15,7 @@ function CategoryCard ({category, onDelete, onUpdate}) {
                 onClose={()=>setIsModalOpen(false)}
                 onDelete={onDelete}
                 onUpdate={onUpdate}
+                category={category}
             />}
 
         <div className='category-card'>

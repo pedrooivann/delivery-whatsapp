@@ -19,4 +19,14 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD
 });
 
+pool.query(`
+    SELECT
+        current_database(),
+        current_user,
+        (SELECT COUNT(*) FROM product) AS products,
+        (SELECT COUNT(*) FROM category) AS categories
+`)
+.then(result => console.log(result.rows))
+.catch(error => console.error(error));
+
 export default pool;

@@ -1,0 +1,39 @@
+.cat-info-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 4fr 1fr 1fr;
+    gap: 20px;
+}
+
+.cat-buttons-container {
+    display: flex;
+    gap: 20px;
+}
+.cat-info-input {
+    margin-left: 50px;
+    padding-left: 10px;
+}
+.cat-edit-button {
+    width: 80px;
+}
+
+.cat-save-button {
+    width: 80px;
+}
+.cat-cancel-button {
+    width: 80px;
+}
+
+.cat-trash-button {
+    width: 35px;
+    height: 35px;
+}
+.cat-trash-icon {
+    width: 35px;
+    height: 35px;
+}
+
+.cat-hr {
+    width: 100%;
+    height: 2px;
+}
