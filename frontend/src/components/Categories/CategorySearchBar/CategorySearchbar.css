@@ -1,9 +1,15 @@
 
 
 .category-searchbar {
+    border: 1px solid hotpink;
+    margin-top: 10px;
     width: 40%;
+    grid-template-columns: 2fr 1fr;
 }
-.category-searchbar-middle-div {
-    width: 0px;
-    height: 0px;
+
+
+
+.category-searchbar .middle-container {
+    display: none;
 }
+

@@ -16,7 +16,7 @@ export async function getCategories (){
     }
 }
 
-export async function createCategories (name){
+export async function createCategory (name){
     try {
         const response = await fetch (`${API_URL}/categories`, {
             

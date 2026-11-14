@@ -2,12 +2,13 @@ import { Search } from 'lucide-react';
 import { ArrowDownAZ, ArrowDownZA } from 'lucide-react';
 import ClientSearchBar from '../../Clients/ClientSearchBar/ClientSearchBar';
 import SearchBar from '../../SearchBar/SearchBar';
+import './ProductSearchBar.css'
 
 function ProductSearchBar (){
 
     return(
         <>
-            <SearchBar
+            <SearchBar className="product-searchbar"
             
                     leftContent={
                         <>

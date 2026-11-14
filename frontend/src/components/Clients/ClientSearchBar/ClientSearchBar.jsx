@@ -28,7 +28,7 @@ function ClientSearchBar({ search, setSearch, setSort, onCreate, onDelete }) {
                             type="text"
                             className="searchbar search"
                             placeholder="Search for clients..."
-                            onChange={(event) => setSearch(event.target.value)}
+                            onChange={(e) => setSearch(e.target.value)}
                             value={search}
                         />
 

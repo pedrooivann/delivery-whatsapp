@@ -1,6 +1,6 @@
 import API_URL from "./api";
 
-async function getProducts () {
+export async function getProducts () {
     try{
         const response = await fetch (`${API_URL}/products`);
 
@@ -17,6 +17,53 @@ async function getProducts () {
     }
 }
 
+export async function createProduct (name, description, price){
+    try {
+        const response = await fetch(`${API_URL}/products`, {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(
+                {name, description, price}
+            )
+        });
+        
+        if(!response.ok){
+            throw new Error("Couldn't create product");
+        }
+        
+        return data;
+    }catch(e){
+        console.error(e);
+    }
+}
+export async function deleteProduct (id) {
+    try {
+        const response = await fetch(`${API_URL}/products`,{
+            method: "DELETE",
+        })
 
+        if(!response.ok){
+            throw new Error("Couldn't delete product")
+        }
 
-export default getProducts;
+        const data = response.json();
+        return data;;
+
+    } catch (e) {
+        
+    }
+}
+
+export async function updateProduct (id, name, description) {
+    try {
+        const response = await fetch(`${API_URL}/products/${id}`, {
+            method: "PUT",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(
+                {name, description, price}
+            )
+    })
+    } catch (e) {
+        console.error(e);
+    }
+}

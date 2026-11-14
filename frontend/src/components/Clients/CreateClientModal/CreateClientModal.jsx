@@ -5,8 +5,9 @@ function CreateClientModal ({onClose, onCreate}){
     return(
         <>
             <Modal onClose={onClose} title={"Create Client"}>
-                <CreateClient onCreate={onCreate}/>
-
+                <CreateClient 
+                    onCreate={onCreate}
+                    onClose={onClose}/>
             </Modal>
         </>
     )

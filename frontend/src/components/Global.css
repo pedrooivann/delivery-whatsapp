@@ -33,6 +33,7 @@ input,
 select,
 textarea {
     font: inherit;
+    padding-left: 10px;
 }
 
 
@@ -88,4 +89,39 @@ main {
     height: 100%;
     overflow-y: auto;
     justify-content: center;
+}
+
+/*General styles*/
+
+.general-input {
+    padding: 10px 12px;
+    font-size: 14px;
+    height: 40px;
+    background-color: var(--bg-secondary);
+    border: none;
+    color: var(--text-primary);
+    border-radius: 5px;
+    box-shadow: 0 5px 16px 0 inset rgba(0,0,0,1);
+    transform: 0.3s;
+    outline: none;
+    transition: border-color 0.25s ease, border-width 0.25s ease;
+}
+.general-input:focus{
+    border: 2px solid #4b4bff;
+}
+
+.general-commit-button {
+    height: 35px;
+    color: var(--text-primary);
+    border: none;
+    background-color: var(--bg-button-commit);
+    border-radius: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.6);
+    transition: 0.3s;
+}
+.general-commit-button:hover{
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(75, 75, 255, 0.25);
 }

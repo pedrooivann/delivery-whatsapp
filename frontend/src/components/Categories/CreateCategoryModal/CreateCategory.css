@@ -1,0 +1,17 @@
+
+.cat-info-container {
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    row-gap: 0px;
+    width: 100%;
+    gap: 30px;
+}
+
+.cat-input-create {
+    margin-left: 70px;
+}
+
+.create-cat-button {
+    margin-right: 70px;
+}
+

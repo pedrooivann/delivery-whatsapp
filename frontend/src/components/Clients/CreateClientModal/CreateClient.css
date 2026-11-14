@@ -23,14 +23,7 @@
 }
 
 .client-input {
-    padding-left: 15px;
-    background-color: var(--bg-secondary);
-    height: 30px;
     width: 100%;
-    border-radius: 7px;
-    color: var(--text-primary);
-    border: none;
-    font-size: 1.2rem;
 }
 
 .info-header {
@@ -40,6 +33,7 @@
 }
 
 textarea.client-input {
+    width: 100%;
     resize: none;
     overflow: visible;
 }
@@ -57,4 +51,11 @@ textarea.client-input {
     border: none;
     border-radius: 7px;
     background-color: var(--bg-button-commit);
+}
+
+
+/**/
+
+.ref-input {
+    height: 40px;
 }

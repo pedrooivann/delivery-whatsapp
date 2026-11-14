@@ -66,13 +66,12 @@ function Clients (){
 
     async function handleUpdate(id, updatedClient) {
         try {
-            console.log("Dados enviados:", updatedClient);
 
             const editedClient = await editClient(id, updatedClient);
 
             console.log("Resposta da API:", editedClient);
             
-            setClients(list=> list.map(client=>client.id  === id? editedClient : client
+            setClients(list=> list.map(client=>client.id  === id ? editedClient : client
             ));
             
         }catch(e){
