@@ -7,7 +7,7 @@ import '../../SearchBar/SearchBar.css';
 
 import CreateClientModal from '../CreateClientModal/CreateClientModal.jsx';
 
-function ClientSearchBar({ search, setSearch, setSort, onCreate, onDelete }) {
+function ClientSearchBar({ search, setSearch, setSort, onCreate, sort }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -40,14 +40,16 @@ function ClientSearchBar({ search, setSearch, setSort, onCreate, onDelete }) {
                 middleContent={
                     <>
                     <button
-                            className="search-index-button index-az-button"
+                            aria-pressed={sort === "AZ"}
+                            className={`${sort === "AZ" ? "sorting-az-selected-border " : ""}search-index-button`} 
                             onClick={() => setSort("AZ")}
                         >
                             <ArrowDownAZ className="search-index-icon" />
                         </button>
 
                         <button
-                            className="search-index-button index-za-button"
+                        aria-pressed={sort === "ZA"}
+                            className={`${sort === "ZA" ? "sorting-az-selected-border " : ""}search-index-button`}
                             onClick={() => setSort("ZA")}
                         >
                             <ArrowDownZA className="search-index-icon" />
@@ -56,7 +58,7 @@ function ClientSearchBar({ search, setSearch, setSort, onCreate, onDelete }) {
 
                 rightContent={
                     <button
-                        className="create-button"
+                        className="general-commit-button general-button create-button"
                         onClick={() => setIsModalOpen(true)}
                     >
                         Create client

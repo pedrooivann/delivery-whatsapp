@@ -13,24 +13,30 @@
 .product-card-info {
     padding: 20px;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    min-height: 0;
 }
 .product-info-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 3fr minmax(0, 5fr);
+    align-items: center;
+    min-width: 0;
 }
-
-
-.product-name-p{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.product-p-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
-
-
-
 .product-tag {
     width: 40%;
     font-weight: 900;
 }
+
+
+
+
+
 
 
 .product-card-button-div {

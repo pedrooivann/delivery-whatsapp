@@ -13,7 +13,6 @@ function CreateClient ({onCreate, onClose}){
 
     return(
         <>
-            <div className="client-main-container">
 
             <form 
                 className='client-form'
@@ -30,8 +29,7 @@ function CreateClient ({onCreate, onClose}){
                     onClose()
                         }}>
         
-                <div className='container'>
-                    
+            
                     <p>Name</p>
                     <input
                     placeholder="e.g., John Doe, Jane Doe"
@@ -41,13 +39,11 @@ function CreateClient ({onCreate, onClose}){
                     onChange={(e)=>setName(e.target.value)}
                     />
 
-                </div>
-
-                <div className='container'>
-                    
+                
                     <p>Telephone</p>
                     <input
                     placeholder="e.g., (99) 1234-5678"
+                    minLength={11}
                     maxLength={11}
                     className="general-input client-input" 
                     type="text" 
@@ -55,11 +51,7 @@ function CreateClient ({onCreate, onClose}){
                     onChange={(e)=>setTelephone(e.target.value)}
                     />
         
-                </div>
                 
-
-                <div className='container'>
-                    
                     <p>Address (street, number)</p>
                     <textarea 
                     maxLength={100}
@@ -70,10 +62,7 @@ function CreateClient ({onCreate, onClose}){
                     onChange={(e)=>setAddressLine1(e.target.value)}
                     />
 
-                </div>
-
-                <div className='container'>
-                    
+                
                     <p>Neighborhood</p>
                     <input
                     placeholder="e.g., Downtown, Midtown, or Oakwood"
@@ -84,10 +73,6 @@ function CreateClient ({onCreate, onClose}){
                     onChange={(e)=>setNeighborhood(e.target.value)}
                     />
 
-                </div>
-
-                <div className='container'>
-                    
                     <p>Reference (Location clue, apartment)</p>
                     <textarea 
                     placeholder="e.g., Next to City Park, blue gate, or building name"
@@ -97,8 +82,6 @@ function CreateClient ({onCreate, onClose}){
                     value={addressLine2}
                     onChange={(e)=>setAddressLine2(e.target.value)}
                     />
-                </div>
-
                 <div className='client-buttons-container'>
                     <button 
                     className="general-commit-button create-button"
@@ -108,7 +91,6 @@ function CreateClient ({onCreate, onClose}){
 
                 </div>
             </form>
-        </div>
         
         </>
     )

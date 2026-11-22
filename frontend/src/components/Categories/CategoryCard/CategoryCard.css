@@ -11,13 +11,21 @@
 }
 
 .category-left-container {
+    padding-left: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 0;
+}
+.category-left-container h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .category-right-container {
-    border: 1px solid green;
     display: flex;
     align-items: center;
     justify-content: center;

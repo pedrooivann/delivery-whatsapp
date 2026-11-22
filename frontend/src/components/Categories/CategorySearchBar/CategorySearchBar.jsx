@@ -1,10 +1,11 @@
 import SearchBar from "../../SearchBar/SearchBar";
 import CreateCategoryModal from "../CreateCategoryModal/CreateCategoryModal";
-import CategoryInfoModal from "../CreateCategoryModal/CreateCategoryModal";
 import './CategorySearchbar.css'
 import { useState } from 'react';
 
-function CategorySearchBar ({onCreate}) {
+
+
+function CategorySearchBar ({onCreate, setSearchCategory, searchCategory}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,17 +21,20 @@ function CategorySearchBar ({onCreate}) {
 
                 <input 
                 type="text"
-                className="searchbar search"
+                className="general-input searchbar search"
                 placeholder="Search for categories..."
-                onChange={(e)=>(e.target.value)}
-                value={()=>{}}/>
+                onChange={(e)=>(setSearchCategory(e.target.value))}
+                value={searchCategory}/>
             
             </>}
 
         
             rightContent = {<>
                 <button 
-                    className="create-button"
+                    className="
+                        general-button
+                        general-commit-button
+                        category-searchbar-commit-button"
                     onClick={()=>setIsModalOpen(true)}>Create category</button>
         
             </>}

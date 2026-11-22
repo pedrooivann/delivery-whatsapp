@@ -1,2 +1,31 @@
 
 
+.client-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.client-form textarea {
+    height: 40%;
+    width: 100%;
+}
+.client-form input {
+    width: 100%
+
+}
+
+.client-trash-button {
+    width: 35px;
+    height: 35px;
+}
+.client-trash-icon {
+    width: 35px;
+    height: 35px;
+}
+
+.client-buttons-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+}

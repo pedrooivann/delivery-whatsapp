@@ -107,10 +107,12 @@ main {
 }
 
 .general-info-input {
-    background-color: var(--bg-surface);
+    border-radius: 5px;
+    background-color: var(--bg-tertiary);
     border: none;
     color: var(--text-primary);
     height: 40px;
+    padding: 10px 12px;
 
 }
 
@@ -161,6 +163,7 @@ main {
 /*Trash Btn*/
 
 .general-trash-button {
+    cursor: pointer;
     background-color: transparent;
     border: none;
     color: rgb(255, 77, 77);
@@ -173,3 +176,25 @@ main {
     stroke-width: 3px;
 }
 
+
+@media screen and (max-width: 480px) {
+
+    .search {
+        width: 220px;
+    }
+
+    .searchbar-div {
+        grid-template-columns: 2fr;
+        gap: 20px;
+        margin-bottom: 50px;
+    }
+
+    .search-index-button {
+        width: 30px;
+        height: 30px;
+    }
+    .search-index-icon {
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -20,8 +20,12 @@ function Clients (){
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("AZ");
     
-    const filteredClients = clients.filter((client) => 
-        client.name.toLowerCase().includes(search.toLowerCase())
+    const filteredClients = clients.filter((client) =>
+        client.name.toLowerCase().includes(search.toLowerCase()) ||
+        client.telephone.includes(search) ||
+        client.address_line1.toLowerCase().includes(search.toLowerCase()) ||
+        client.neighborhood.toLowerCase().includes(search.toLowerCase()) ||
+        client.address_line2.toLowerCase().includes(search.toLowerCase())
     );
 
     const sortedClients = [...filteredClients].sort((a, b) => {
@@ -57,19 +61,23 @@ function Clients (){
     async function handleDelete (id) {
         try {
             await deleteClient(id);    
-            setClients((prevClients)=> prevClients.filter(client => client.id !== id));
+            setClients((prevClients)=> prevClients.filter(client => client.id !== id) );
                 
         }catch(e){
                 console.error(e);
             }
         }   
 
-    async function handleUpdate(id, updatedClient) {
+    async function handleUpdate(id, name, telephone, addressLine1, addressLine2, neighborhood) {
         try {
 
-            const editedClient = await editClient(id, updatedClient);
-
-            console.log("Resposta da API:", editedClient);
+            const editedClient = await editClient(
+                id, 
+                name, 
+                telephone, 
+                addressLine1, 
+                addressLine2, 
+                neighborhood);
             
             setClients(list=> list.map(client=>client.id  === id ? editedClient : client
             ));
@@ -78,9 +86,6 @@ function Clients (){
             console.error(e);
         }
     }
-
-    
-    
 
 
     return (
@@ -110,8 +115,8 @@ function Clients (){
                         <ClientCard
                             key={client.id}
                             client={client}
-                            handleDelete={handleDelete}
-                            handleUpdate={handleUpdate}
+                            onDelete={handleDelete}
+                            onUpdate={handleUpdate}
                         />
                         
                     ))}

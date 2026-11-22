@@ -2,7 +2,7 @@ import './ClientInfo.css';
 import { useState } from 'react';
 import { Trash } from 'lucide-react';
 
-function ClientInfo ({client, onDelete, onUpdate}) {
+function ClientInfo ({client, onDelete, onUpdate, onClose}) {
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -12,117 +12,137 @@ function ClientInfo ({client, onDelete, onUpdate}) {
     const [neighborhood, setNeighborhood] = useState(client.neighborhood);
     const [addressLine2, setAddressLine2] = useState(client.address_line2);
 
-    const updatedClient  = {
-        name: name,
-        telephone: telephone, 
-        addressLine1 : addressLine1, 
-        addressLine2 : addressLine2, 
-        neighborhood : neighborhood}
-    ;
-
-    
     return (
         <>
         
-
-        <div className="client-info-main-container">
+        <div className="client-main-container">
 
             <form 
                 onSubmit={(e)=>{
                     e.preventDefault();
-                    onUpdate(client.id, updatedClient)
+                    onUpdate(
+                        client.id,
+                        name,
+                        telephone,
+                        addressLine1,
+                        addressLine2,
+                        neighborhood
+                    )
                     setIsEditing(false)
+                    console.log(client)
+                    onClose()
                 }} 
                 className='client-form'>
         
-                <div className='info-container'>
-                    
+                
                     <p>Name</p>
                     <textarea 
-                    className={`client-info-input ${isEditing? "is-editing-input":""}`}
+                    required
+                    className={`client-info-input ${isEditing? "general-input":"general-info-input"}`}
                     type="text" 
                     value={name}
                     disabled={!isEditing}
                     onChange={(e)=>setName(e.target.value)}
                     />
 
-                </div>
-                <hr/>
 
-                <div className='info-container'>
-                    
+                
                     <p>Telephone</p>
                     <input
-                    className={`client-info-input ${isEditing? "is-editing-input":""}`}
+                    required
+                    pattern="[0-9]{11}"
+                    minLength={11}
+                    maxLength={11}
+                    className={`client-info-input ${isEditing? "general-input":"general-info-input"}`}
                     type="text" 
                     value={telephone}
                     disabled={!isEditing}
-                    onChange={(e)=>setTelephone(e.target.value)}
+                    onChange={(e)=>setTelephone(e.target.value.replace(/\D/g, ""))}
                     />
         
-                </div>
-                <hr />
+                
 
-                <div className='info-container'>
-                    
+                
                     <p>Address</p>
-                    <textarea 
-                    className={`client-info-input ${isEditing? "is-editing-input":"not"}`}
+                    <textarea
+                    required 
+                    className={`client-info-input ${isEditing? "general-input":"general-info-input"}`}
                     type="text" 
                     value={addressLine1}
                     disabled={!isEditing}
                     onChange={(e)=>setAddressLine1(e.target.value)}
                     />
 
-                </div>
-                <hr />
+                
 
-                <div className='info-container'>
-                    
+                
                     <p>Neighborhood</p>
                     <input 
-                    className={`client-info-input ${isEditing? "is-editing-input":""}`}
+                    required
+                    className={`client-info-input ${isEditing? "general-input":"general-info-input"}`}
                     type="text" 
                     value={neighborhood}
                     disabled={!isEditing}
                     onChange={(e)=>setNeighborhood(e.target.value)}
                     />
 
-                </div>
-                <hr />
 
-                <div className='info-container'>
-                    
                     <p>Reference</p>
-                    <textarea 
-                    className={`client-info-input ${isEditing? "is-editing-input":""}`}
+                    <textarea
+                    required 
+                    className={`client-info-input ${isEditing? "general-input":"general-info-input"}`}
                     type="text" 
                     value={addressLine2}
                     disabled={!isEditing}
                     onChange={(e)=>setAddressLine2(e.target.value)}
                     />
-                </div>
-                <hr />
+
 
                 <div className='client-buttons-container'>
 
-                        <button 
+                        {!isEditing && <button 
                         type='button'
                         onClick={()=>onDelete(client.id)} 
-                        className='delete-client-button'>
-                            <Trash className='delete-client-icon'/>
-                        </button>
+                        className='
+                        general-trash-button 
+                        client-trash-button'>
+                            <Trash className='
+                            trash-icon 
+                            client-trash-icon'/>
+                        </button>}
 
-                        {isEditing && <button className="submit-button" type="submit"  >Save changes</button>}
+                        {isEditing && <button
+                        onClick={()=>{
+                            setName(client.name)
+                            setTelephone(client.telephone)
+                            setAddressLine1(client.addressLine1)
+                            setAddressLine2(client.addressLine2)
+                            setNeighborhood(client.neighborhood)
+                            setIsEditing(false)
+                        }}
+                        className='
+                        general-button 
+                        general-grey-button 
+                        client-cancel-button'
+                        >Cancel</button>}
+
+                        {isEditing && <button 
+                        className="
+                        general-button 
+                        general-save-button 
+                        client-save-button" 
+                        type="submit"  >Save</button>}
 
                         {!isEditing && <button 
                         type='button'
-                        onClick={()=>{console.log("Botao clicado"); setIsEditing(prev => !prev)}} 
-                        className='edit-client-button'>Edit</button>}
+                        onClick={()=>setIsEditing(prev => !prev)} 
+                        className='
+                        general-grey-button 
+                        general-button
+                        client-edit-button'>Edit</button>}
                 </div>
             </form>
         </div>
-        
         </>
     )
 }

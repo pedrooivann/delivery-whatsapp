@@ -63,7 +63,7 @@ function CategoryInfo ({onClose, onUpdate, onDelete, category}){
             
             
 
-            <button 
+            {!isEditing && <button 
             
                 onClick={()=>onDelete(category.id)}
                 type='button'
@@ -73,10 +73,9 @@ function CategoryInfo ({onClose, onUpdate, onDelete, category}){
                     cat-trash-button'
                 
                     ><Trash className='
-                        general-trash-button
                         trash-icon
                         cat-trash-icon'
-                        /></button>
+                        /></button>}
         </form>
     </>)
 }

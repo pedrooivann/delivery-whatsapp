@@ -15,6 +15,7 @@ function CreateCategory ({onCreate, onClose}){
                     }
                 }>
                 <input 
+                    required
                     placeholder='Category name...'
                     type="text"
                     className='
@@ -22,6 +23,7 @@ function CreateCategory ({onCreate, onClose}){
                         cat-input-create'
                     onChange={(e)=>setName(e.target.value)}
                     value={name}
+                    maxLength={40}
                     />
 
                 <button 

@@ -44,8 +44,12 @@ export async function createProductController(req, res) {
         return res.status(400).json({message: "A valid name is required!"});
     }
 
-    if (typeof description !== "string" || !description.trim()) {
-        return res.status(400).json({ message: "The description must be valid!"});
+    if (description !== undefined && description !== null) {
+    if (typeof description !== "string") {
+        return res.status(400).json({
+            message: "Description must be a string!"
+            }); 
+        }
     }
 
     if (
@@ -112,8 +116,12 @@ export async function updateProductController(req, res) {
         return res.status(400).json({message: "A valid name is required!"});
     }
 
-    if (typeof description !== "string" || !description.trim()) {
-        return res.status(400).json({message: "The description must be valid!"});
+    if (description !== undefined && description !== null) {
+    if (typeof description !== "string") {
+        return res.status(400).json({
+            message: "Description must be a string!"
+            }); 
+        }
     }
 
     if (

@@ -1,7 +1,6 @@
 
 
 .category-searchbar {
-    border: 1px solid hotpink;
     margin-top: 10px;
     width: 40%;
     grid-template-columns: 2fr 1fr;
@@ -11,5 +10,8 @@
 
 .category-searchbar .middle-container {
     display: none;
+}
+.category-searchbar-commit-button {
+    width: 100%;
 }
 

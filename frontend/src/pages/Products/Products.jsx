@@ -29,11 +29,15 @@ import '../content-section.css';
 
 function Products (){
 
-    
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([])
 
     const [menu, setMenu] = useState(true);
+
+    const [searchCategory, setSearchCategory] = useState("");
+
+    const [idCategory, setIdCategory] = useState("");
+    const [sortOption, setSortOption] = useState("az");
 
     useEffect(()=>{
             async function loadCategories (){
@@ -52,6 +56,7 @@ function Products (){
         async function loadProducts(){
             try {
                 const data = await getProducts();
+                
                 setProducts(data);
             }catch(e){
                 console.error(e)
@@ -60,6 +65,7 @@ function Products (){
         loadProducts()
     }, []);
 
+    
     async function handleCreateCategory(name) {
             try {
                 const newCategory = await createCategory(name);
@@ -95,8 +101,56 @@ function Products (){
         }
     }
 
+    async function handleCreateProduct (id_category, name, description, price){
+        try {
+            
+            const newProduct = await createProduct(
+                Number(id_category), 
+                name, 
+                description, 
+                price
+            );
+            setProducts((products)=>[...products, newProduct]);
+            return newProduct;
+        
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function handleDeleteProduct (id) {
+        try {
+            await deleteProduct(id);
+
+            setProducts(prevProducts=> 
+                prevProducts.filter(product=> product.id !== id));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function handleUpdateProduct(id, idCategory, name, description, price) {
+        try {
+            const editedProduct = await updateProduct(
+                id, 
+                idCategory, 
+                name, 
+                description, 
+                price);
+            
+            setProducts((products)=>
+                products.map((product)=>
+                    product.id !== id? product : editedProduct
+        ))
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     return(
         <>
+
+        
             <div className='outer-layout'>
                 <Header></Header>
 
@@ -113,19 +167,43 @@ function Products (){
                             {menu ?
                             
                             <>
-                                <ProductSearchBar/>
+                                <ProductSearchBar 
+                                    onCreate={handleCreateProduct}
+
+                                    categories={categories}
+                                    idCategory={idCategory}
+                                    setIdCategory={setIdCategory}
+                                    
+                                    
+                                    sortOption={sortOption}
+                                    setSortOption={setSortOption}
+
+                                    />
 
                                 <hr className="content-section-main-hr"/>
 
 
-                                <ProductList products={products}/>
+                                <ProductList 
+                                    products={products}
+                                    onUpdate={handleUpdateProduct}
+                                    onDelete={handleDeleteProduct}
+
+                                    sortIdCategory={idCategory}
+                                    sortOption={sortOption}
+                                    
+                                    />
+                                    
                             </> 
                             
                             : 
                             
                             <>
 
-                                <CategorySearchBar onCreate={handleCreateCategory} />
+                                <CategorySearchBar 
+                                    onCreate={handleCreateCategory}
+                                    setSearchCategory={setSearchCategory}
+                                    searchCategory={searchCategory} />
+                                    
 
                                 <hr className="content-section-main-hr"/>
 
@@ -133,6 +211,8 @@ function Products (){
                                     categories={categories}
                                     onDelete={handleDeleteCategory}
                                     onUpdate={handleUpdateCategory}
+                                    setSearchCategory={setSearchCategory}
+                                    searchCategory={searchCategory}
                                     />
 
                             </>}

@@ -26,6 +26,8 @@ export async function createCategory (name){
     });
 
         if(!response.ok){
+            const errorData = await response.json();
+            console.error("Error on creating category-> ", errorData)
             throw new Error("Coundn't create Category");
         }
 
@@ -48,10 +50,7 @@ export async function deleteCategory(id){
             throw new Error("Couldn't delete Category");
         }
 
-        const data = await response.json();
-
-        return data;
-
+        return true;
     }catch(e){
         console.error(e);
     }

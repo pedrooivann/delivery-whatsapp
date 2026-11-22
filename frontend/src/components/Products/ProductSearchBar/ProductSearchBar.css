@@ -3,9 +3,16 @@
     margin-top: 10px;
 }
 
+.products-searchbar-input {
+    width: 100%;
+}
+
+.product-searchbar-commit-button {
+    width: 100%;
+}
+
 .section-products {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
-

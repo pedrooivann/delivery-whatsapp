@@ -1,11 +1,34 @@
 class Orders {
-    constructor(OrderOrigin) {
-        this.OrderStatus = OrderStatus.NEW;
-        this.OrderOrigin = OrderOrigin;
+    constructor(
+        id_client,
+
+        orderStatus,
+        orderOrigin,
+        orderPaymentStatus,
+        
+        orderPaymentMethod,
+        notes,
+        delivery_neighborhood, 
+        delivery_reference,
+
+        delivery_fee 
+    ) {
+        this.id_client = id_client
+
+        this.orderStatus = orderStatus.NEW;
+        this.orderOrigin = orderOrigin;
+        this.orderPaymentStatus = orderPaymentStatus.PENDING;
+        
+        this.delivery_fee = delivery_fee;
+
+        this.orderPaymentMethod = orderPaymentMethod;
+        this.notes = notes;
+        this.delivery_neighborhood = delivery_neighborhood;
+        this.delivery_reference = delivery_reference;
     }
 }
 
-const OrderStatus = Object.freeze({
+export const orderStatus = Object.freeze({
     NEW: 'new',
     CONFIRMED: 'confirmed',
     PREPARING: 'preparing',
@@ -15,14 +38,27 @@ const OrderStatus = Object.freeze({
     CANCELED: 'canceled'
 });
 
-const OrderOrigin = Object.freeze({
+export const orderOrigin = Object.freeze({
     WHATSAPP_BOT: 'whatsapp_bot',
     WHATSAPP_MANUAL:'whatsapp_manual'
 });
 
-export default { //Default, pois na importação os dois serão uma coisa só -> OrderStatus obrigatoriamente acomapanhado de Order
+const orderPaymentStatus = Object.freeze({
+    PENDING: 'pending',
+    PAID: 'paid',
+    FAILED: 'failed',
+    REFUNDED: 'refunded'
+})
+
+export const orderPaymentMethod = Object.freeze({
+    PIX: "pix"
+})
+
+export default {
     Orders,
-    OrderStatus,
-    OrderOrigin
+    orderStatus,
+    orderOrigin,
+    orderPaymentStatus,
+    orderPaymentMethod
 };
 

@@ -1,0 +1,13 @@
+
+.edit-product-button {
+    width: 100px;
+}
+
+.cancel-product-button, .save-product-button  {
+    width: 80px;
+}
+
+.prod-trash-icon {
+    width: 35px;
+    height: 35px;
+}

@@ -12,6 +12,7 @@ function ClientInfoModal ({onClose, client, onDelete, onUpdate}){
                 client={client}
                 onDelete={onDelete}
                 onUpdate={onUpdate}
+                onClose={onClose}
                 />
             </Modal>
         </>

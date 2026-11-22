@@ -16,12 +16,37 @@ export async function getOrder (id) {
     return result.rows[0];
 };
 
-export async function createOrder (id_client, order_origin, delivery_address) {
+export async function createOrder (
+    id_client, 
+    order_origin, 
+    delivery_address, 
+    payment_method, 
+    notes, 
+    delivery_neighborhood, 
+    delivery_reference,
+    delivery_fee
+) {
     const result = await pool.query(
-        `INSERT INTO orders (id_client, order_origin, delivery_address)
-        VALUES ($1, $2, $3)
+        `INSERT INTO orders (
+        id_client, 
+        order_origin, 
+        delivery_address, 
+        payment_method, 
+        notes, 
+        delivery_neighborhood, 
+        delivery_reference,
+        delivery_fee
+        )
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING *;`,
-        [id_client, order_origin, delivery_address]
+        [id_client, 
+        order_origin, 
+        delivery_address, 
+        payment_method, 
+        notes, 
+        delivery_neighborhood, 
+        delivery_reference,
+        delivery_fee]
     )
     return result.rows[0];
 };
@@ -37,7 +62,6 @@ export async function deleteOrder (id) {
 };
 
 
-//Atualizar status do pedido
 export async function updateOrderStatus (id, order_status) {
     const result = await pool.query(
         `UPDATE orders
@@ -48,17 +72,32 @@ export async function updateOrderStatus (id, order_status) {
     );
     return result.rows[0];
 };
-//Atualizar endereço do pedido
-export async function updateOrderAddress (id, delivery_address) {
+
+export async function updateOrderAddress (id, delivery_address, delivery_neighborhood, delivery_reference) {
     const result = await pool.query(
         `UPDATE orders
-        SET delivery_address= $2
+        SET 
+        delivery_address= $2, 
+        delivery_neighborhood= $3, 
+        delivery_reference = $4
         WHERE id= $1
         RETURNING *;`,
-        [id, delivery_address]
+        [id, delivery_address, delivery_neighborhood, delivery_reference]
     );
     return result.rows[0];
 };
+
+
+export async function updateOrderNotes (id, notes){
+    const result = await pool.query(
+        `UPDATE orders
+        SET notes = $2
+        WHERE id = $1
+        RETURNING *;`,
+        [id, notes]
+    )
+    return result.rows[0]
+}
 
 //Calcula variavel total
 export async function calculateTotal (client, id_orders) {

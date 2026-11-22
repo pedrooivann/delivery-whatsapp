@@ -44,6 +44,9 @@ export async function createCategoryController (req, res){
 
     if (typeof name !== "string" || !name.trim()) return res.status(400).json({message: "A valid name is required"});
 
+    if(name.length > 100) {
+        return res.status(400).json({error: "Category name must have at most 100 characters"})
+    }
     try {
         const category = await createCategory(name.trim());
 

@@ -7,6 +7,8 @@ import {
     updateClient
 } from "../services/client.service.js";
 
+
+
 export async function getClientController (req, res) {
     const id = Number(req.params.id);
 
@@ -79,9 +81,16 @@ export async function createClientController (req, res) {
     if (typeof address_line1 !== "string" || !address_line1.trim()) 
         return res.status(400).json({message: "The first address information must be valid"});
 
-    if (typeof address_line2 !== "string" || !address_line2.trim()) 
-        return res.status(400).json({message: "The second address information must be valid"});
-
+    if (
+    address_line2 !== undefined &&
+    address_line2 !== null &&
+    typeof address_line2 !== "string"
+    ) {
+        return res.status(400).json({
+            message: "The second address information must be valid"
+        });
+    }
+    
     if (typeof neighborhood !== "string" || !neighborhood.trim()) 
         return res.status(400).json({message: "The neighborhood must be valid"});
     
@@ -138,9 +147,16 @@ export async function updateClientController (req, res){
     if (typeof address_line1 !== "string" || !address_line1.trim()) 
         return res.status(400).json({message: "The first address information must be valid"});
     
-    if (typeof address_line2 !== "string" || !address_line2.trim()) 
-        return res.status(400).json({message: "The second address information must be valid"});
-    
+    if (
+    address_line2 !== undefined &&
+    address_line2 !== null &&
+    typeof address_line2 !== "string"
+    ) {
+        return res.status(400).json({
+            message: "The second address information must be valid"
+        });
+    }
+
     if (typeof neighborhood !== "string" || !neighborhood.trim()) 
         return res.status(400).json({message: "The neighborhood must be valid"});
     

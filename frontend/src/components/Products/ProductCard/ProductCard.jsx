@@ -2,12 +2,12 @@ import './ProductCard.css';
 import { getCategories } from '../../../services/categoriesService';
 import { useEffect, useState } from 'react';
 
-import ProductInforModal from '../ProductInfoModal/ProducInfoModal.jsx';
+import ProductInfoModal from './ProductInfoModal/ProductInfoModal.jsx';
 
-function ProductCard ({product}) {
+function ProductCard ({product, onUpdate, onDelete}) {
 
     const [categories, setCategories] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(()=>{
         async function loadCategories() {
@@ -34,33 +34,40 @@ function ProductCard ({product}) {
 
     return(<>
 
-        {selectedProduct && <ProductInforModal 
-            onclose={onClose}
+        {isModalOpen && <ProductInfoModal 
+            onClose={()=>setIsModalOpen(false)}
             product={product}
+            categories={categories}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
         />}
     
         <div className="product-card">
+            
             
             <div className="product-card-info">
 
                 <div className='product-info-container'>
                     <p className='product-tag'>Name: </p>
-                    <p className='product-name-p'>{product.name}</p>
+                    <p className='product-name-p product-p-info'>{product.name}</p>
                 </div>
 
                 <div className='product-info-container'>
                     <p className='product-tag'>Description: </p>
-                    <p className='product-description-p'>{product.description}</p>
+                    <p className='product-description-p product-p-info'>{product.description}</p>
                 </div>
 
                 <div className='product-info-container'>
                     <p className='product-tag'>Price: </p>
-                    <p className='product-price-p'>${product.price}</p>
+                    <p className='product-price-p product-p-info'>{Number(product.price).toLocaleString("us-EN", 
+                        {style: "currency", 
+                        currency: "USD"}
+                        )}</p>
                 </div>
 
                 <div className='product-info-container'>
                     <p className='product-tag'>Category</p>
-                    <p>{getCategoryName(product.id_category)}</p>
+                    <p className='product-description-p product-p-info'>{getCategoryName(product.id_category)}</p>
                 </div>
 
             </div>
@@ -68,7 +75,7 @@ function ProductCard ({product}) {
             <div className="product-card-button-div">
 
                 <button className="product-card-button"
-                onClick={()=> setSelectedProduct(product)}
+                onClick={()=> setIsModalOpen(true)}
                 >Open product</button>
             
             </div>

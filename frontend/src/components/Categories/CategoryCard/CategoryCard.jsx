@@ -26,6 +26,7 @@ function CategoryCard ({category, onDelete, onUpdate}) {
 
                 <button 
                     className='category-card-button'
+                    title='Edit category'
                     onClick={()=>setIsModalOpen(true)}><SquarePen className='category-card-button-icon'/></button>
             
             </div>
