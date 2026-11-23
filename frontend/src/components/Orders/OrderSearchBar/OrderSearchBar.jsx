@@ -7,7 +7,7 @@ function OrderSearchBar () {
 
                 <input 
                 type="text"
-                className="searchbar search"
+                className="general-input searchbar search"
                 placeholder="Search for Orders..."
 
                 />
