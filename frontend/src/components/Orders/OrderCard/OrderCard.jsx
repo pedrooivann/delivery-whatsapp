@@ -1,8 +1,8 @@
+import './OrderCard.css'
 
-
-function OrderCard (){
-    <>
-    </>
+function OrderCard ({order}){
+    
+    <div className="order-container"></div>
 };
 
 export default OrderCard;

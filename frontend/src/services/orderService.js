@@ -93,7 +93,7 @@ export async function updateOrderAddress(
     ) {
     
     try {
-        const response = await fetch(`${API_URL}/orders/${id}`, {
+        const response = await fetch(`${API_URL}/orders/${id}/address`, {
             method: "PATCH",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({
@@ -117,7 +117,7 @@ export async function updateOrderAddress(
 
 export async function updateOrderNotes(id, notes){
     try {
-        const response = await fetch(`${API_URL}/orders/${id}`, {
+        const response = await fetch(`${API_URL}/orders/${id}/notes`, {
             method: "PATCH",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({
@@ -139,7 +139,7 @@ export async function updateOrderNotes(id, notes){
 
 export async function updateOrderStatus (id, order_status){
     try {
-        const response = await fetch (`${API_URL}/orders/${id}`, {
+        const response = await fetch (`${API_URL}/orders/${id}/status`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

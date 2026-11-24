@@ -1,0 +1,21 @@
+
+
+.client-result-container {
+    min-height: 0px;
+    border-radius: 7px;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    position: absolute;
+}
+
+.client-result-container p {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.client-result-container p:hover {
+    background-color: var(--bg-hover);
+}

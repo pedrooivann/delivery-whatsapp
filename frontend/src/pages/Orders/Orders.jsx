@@ -35,7 +35,8 @@ function Orders (){
         loadOrders()
     }, [])
 
-    async function handleCreateorder(id_client,
+    async function handleCreateOrder(
+        id_client,
         order_origin,
         delivery_address,
         payment_method,
@@ -53,7 +54,7 @@ function Orders (){
                 delivery_reference
             )
 
-            setOrders((prev)=>[...prev, newOrder]);
+            setOrders((prev)=>[...prev, newOrder.order]);
 
         } catch (e) {
             console.error(e)
@@ -62,15 +63,55 @@ function Orders (){
 
     async function handleDeleteOrder (id) {
         try {
-            const deleted = await deleteOrder(id)
-
-            setOrders((prev)=>prev.filter(order)=> order.id !== id);
+            await deleteOrder(id)
+            setOrders((prev)=>prev.filter((order)=> order.id !== id));
 
         } catch (e) {
             console.log(e)
         }
     }
 
+    async function handleUpdateOrderAddress (
+        id, 
+        delivery_address, 
+        delivery_neighborhood, 
+        delivery_reference
+    ){
+        try {
+            const updatedAddress = await updateOrderAddress(
+                id, 
+                delivery_address, 
+                delivery_neighborhood, 
+                delivery_reference
+            )
+
+            setOrders(prev=> prev.map(order => order.id === id? updatedAddress.order : order))
+
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    async function handleUpdateOrderNotes (id, notes){
+        try {
+            const updatedNotes = await updateOrderNotes(id, notes);
+
+            setOrders(prev => prev.map(order=> order.id === id? updatedNotes.order : order))
+        
+        } catch (e) {
+            console.error(e);    
+        }
+    }
+
+    async function handleUpdateOrderStatus (id, order_status){
+        try {
+            const updatedStatus = await updateOrderStatus(id, order_status)
+
+            setOrders(prev => prev.map(order=> order.id === updatedNotes.id? updatedNotes.order : order))
+        } catch (e) {
+            console.error(e)
+        }
+    }
     return (
         <>  
             <div className="outer-layout">
@@ -84,7 +125,8 @@ function Orders (){
 
                         <hr className="content-section-main-hr"/>
 
-                        <OrderList/>
+                        <OrderList
+                            orders={orders}/>
 
                         </div>
                 </div>

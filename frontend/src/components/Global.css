@@ -75,7 +75,11 @@ textarea {
     background-color: var(--bg-primary);
 }
 
+
+
+
 .layout {
+    width: 100%;
     display: flex;
     background-color: var(--bg-primary);
 
