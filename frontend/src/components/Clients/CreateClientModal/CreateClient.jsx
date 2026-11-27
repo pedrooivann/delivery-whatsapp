@@ -82,9 +82,12 @@ function CreateClient ({onCreate, onClose}){
                     value={addressLine2}
                     onChange={(e)=>setAddressLine2(e.target.value)}
                     />
-                <div className='client-buttons-container'>
+                <div className='buttons-container'>
                     <button 
-                    className="general-commit-button create-button"
+                    className="
+                        general-button 
+                        general-commit-button 
+                        create-button"
                     type="submit"
                     
                         >Create Client</button>

@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
     getOrderItemController,
     getOrderItemsController,
-    createOrderItemController,
+    createOrderItemsController,
     deleteOrderItemController,
     updateAmountController,
     updateOrderItemController
@@ -12,7 +12,7 @@ const router = Router({mergeParams: true});
 
 router.get("/", getOrderItemsController);
 router.get("/:id", getOrderItemController);
-router.post("/", createOrderItemController);
+router.post("/", createOrderItemsController);
 router.delete("/:id", deleteOrderItemController);
 router.patch("/:id", updateOrderItemController);
 router.patch("/:id/amount", updateAmountController);

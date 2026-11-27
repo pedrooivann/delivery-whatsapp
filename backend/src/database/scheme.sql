@@ -69,5 +69,7 @@ CREATE TABLE order_items (
 ```
 
 
-SELECT * FROM orders
+SELECT *
+FROM order_items
+WHERE id_orders = 8;
 

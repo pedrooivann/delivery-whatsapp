@@ -1,0 +1,62 @@
+.order-item-list-card {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 12px;
+    background-color: var(--bg-secondary);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-item-list-card-content {
+    height: 90px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+}
+
+.see-order-item-button {
+    width: 10%;
+    height: 60px;
+    background-color: transparent;
+    border: none;
+}
+.see-order-item-button-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--text-primary);
+}
+
+.order-item-p-name {
+    font-weight: bold;
+}
+.order-item-p-price {
+}
+.order-item-p-description{
+}
+
+.order-item-list-card-content p {
+    margin: 0 !important;
+    min-width: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+
+
+@media screen and  (max-width: 500px) {
+    .order-item-list-card-content{
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .order-item-list-card-content p {
+        width: 100%;
+    }
+}
+
+

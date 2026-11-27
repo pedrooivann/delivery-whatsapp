@@ -2,7 +2,7 @@ import { useState } from "react";
 import SearchBar from "../../SearchBar/SearchBar";
 import CreateOrderModal from "../CreateOrderModal/CreateOrderModal";
 
-function OrderSearchBar ({onClose}) {
+function OrderSearchBar ({onClose, onCreateOrder}) {
 
     const [isModalOpen, setIsModalOpen]= useState(false)
 
@@ -10,7 +10,8 @@ function OrderSearchBar ({onClose}) {
 
         {isModalOpen && 
             <CreateOrderModal 
-                onClose={()=>setIsModalOpen(false)}/>}
+                onClose={()=>setIsModalOpen(false)}
+                onCreateOrder={onCreateOrder}/>}
 
 
         <SearchBar

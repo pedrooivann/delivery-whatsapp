@@ -10,38 +10,68 @@ import pool from "../database/database.js"
 
 
 
-export async function createOrderItemTransaction (id_orders, id_product, amount) {
-
+export async function createOrderItemsTransaction(id_orders, items) {
     const client = await pool.connect();
 
-    try{
+    try {
+        await client.query("BEGIN");
 
-        await client.query(`BEGIN`);
+        const order = await client.query(
+            `SELECT id FROM orders WHERE id = $1`,
+            [id_orders]
+        );
 
-        
-        const product = await getProduct(client, id_product);
-        if(!product) {throw new Error("ProductNotFound")};
+        if (order.rowCount === 0) {
+            throw new Error("OrderNotFound");
+        }
 
-        const createdOrderItem = await createOrderItem(client, id_orders, id_product, amount);
-        if (!createdOrderItem) { throw new Error("Order item was not created"); }
-        const updatedTotal = await calculateTotal(client, id_orders);
-        await client.query(`COMMIT`);
+        const createdItems = [];
+
+        for (const item of items) {
+            const { id_product, amount } = item;
+
+            const product = await getProduct(client, id_product);
+
+            if (!product) {
+                throw new Error("ProductNotFound");
+            }
+
+            const createdOrderItem = await createOrderItem(
+                client,
+                id_orders,
+                id_product,
+                amount
+            );
+
+            if (!createdOrderItem) {
+                throw new Error("OrderItemNotCreated");
+            }
+
+            createdItems.push(createdOrderItem);
+        }
+
+        const updatedOrder = await calculateTotal(client, id_orders);
+
+        await client.query("COMMIT");
 
         return {
-            item: createdOrderItem, 
-            total: updatedTotal
+            items: createdItems,
+            total: updatedOrder.total_value
         };
-    }catch(e){
-        try{
-            await client.query(`ROLLBACK`);
-                }catch(rollbackError){
-                    console.error("The Rollback failed", rollbackError);
-            };
+
+    } catch (e) {
+        try {
+            await client.query("ROLLBACK");
+        } catch (rollbackError) {
+            console.error("Rollback failed", rollbackError);
+        }
+
         throw e;
-    }finally{
-        client.release()
-    };
-};
+
+    } finally {
+        client.release();
+    }
+}
 
 export async function deleteOrderItemTransaction (id, id_orders) {
     const client = await pool.connect();

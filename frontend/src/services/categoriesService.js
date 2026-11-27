@@ -1,4 +1,3 @@
-import Header from "../components/Header/Header";
 import API_URL from "./api";
 
 export async function getCategories (){

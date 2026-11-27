@@ -18,17 +18,19 @@ export async function getOrderItems(id_orders){
     return result.rows;
 };
 
-export async function createOrderItem (client, id_orders, id_product, amount) {
+export async function createOrderItem(client, id_orders, id_product, amount) {
     const result = await client.query(
-        `INSERT INTO order_items (id_orders, id_product, amount, unit_price) 
+        `INSERT INTO order_items
+        (id_orders, id_product, amount, unit_price)
         SELECT $1, id, $3, price
         FROM product
-        WHERE id=$2
-        RETURNING  *;`,
-        [id_orders, id_product, amount] // id e price vão ser da tabela produto
-        );
+        WHERE id = $2
+        RETURNING *;`,
+        [id_orders, id_product, amount]
+    );
+
     return result.rows[0];
-};
+}
 
 export async function deleteOrderItem (client, id, id_orders) {
     const result = await client.query(

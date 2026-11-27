@@ -26,7 +26,7 @@ function ClientSearchBar({ search, setSearch, setSort, onCreate, sort }) {
                     <>
                         <input
                             type="text"
-                            className="searchbar search"
+                            className="general-input searchbar search"
                             placeholder="Search for clients..."
                             onChange={(e) => setSearch(e.target.value)}
                             value={search}

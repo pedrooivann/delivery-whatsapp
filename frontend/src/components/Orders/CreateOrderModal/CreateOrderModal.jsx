@@ -1,10 +1,11 @@
 import Modal from './../../../components/Modal/Modal.jsx'
 import CreateOrder from './CreateOrder.jsx'
 
-function CreateOrderModal ({onClose}){
+function CreateOrderModal ({onClose, onCreateOrder}){
     return(<>
         <Modal onClose={onClose}>
-            <CreateOrder/>
+            <CreateOrder
+                onCreateOrder={onCreateOrder}/>
 
             </Modal>
         

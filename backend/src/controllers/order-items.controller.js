@@ -1,9 +1,11 @@
-import { 
-    createOrderItemTransaction, 
+import {
+    createOrderItemsTransaction,
     deleteOrderItemTransaction,
     updateAmountTransaction,
-    updateOrderItemTransaction} from '../services/order-items.transaction.service.js';
-import { 
+    updateOrderItemTransaction
+} from '../services/order-items.transaction.service.js';
+
+    import { 
     getOrderItem,
     getOrderItems
 } from '../services/order-items.service.js';
@@ -31,6 +33,7 @@ export async function getOrderItemController (req, res){
 
 export async function getOrderItemsController (req, res){
     const id_order = Number(req.params.id_order);
+    
     if (!Number.isInteger(id_order) || id_order <= 0) return res.status(400).json({message:"The ID must be a valid value!"});
 
 
@@ -47,35 +50,72 @@ export async function getOrderItemsController (req, res){
     };
 };
 
-export async function createOrderItemController (req, res){
+export async function createOrderItemsController(req, res) {
+    const id_orders = Number(req.params.id_order);
+    const items = req.body;
 
-    const id_order = Number(req.params.id_order);
-    const id_product = Number(req.body.id_product);
-    const amount = Number(req.body.amount);
-    
-    if(!Number.isInteger(id_order) || id_order<=0) return res.status(400).json({message: "The ID from Orders must be valid!"});
-    if(!Number.isInteger(id_product) || id_product<=0) return res.status(400).json({message: "The ID from Products must be valid!"});
-    if(!Number.isInteger(amount) || amount<=0) return res.status(400).json({message: "The amount of items must be valid!"});
+    if (!Number.isInteger(id_orders) || id_orders <= 0) {
+        return res.status(400).json({
+            message: "Invalid order ID"
+        });
+    }
 
+    if (!Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({
+            message: "Invalid or empty items list"
+        });
+    }
+
+    for (const item of items) {
+        if (!item || typeof item !== "object" || Array.isArray(item)) {
+            return res.status(400).json({
+                message: "Invalid item format"
+            });
+        }
+
+        const { id_product, amount } = item;
+
+        if (!Number.isInteger(id_product) || id_product <= 0) {
+            return res.status(400).json({
+                message: "Invalid product ID"
+            });
+        }
+
+        if (!Number.isInteger(amount) || amount <= 0) {
+            return res.status(400).json({
+                message: "Invalid item amount"
+            });
+        }
+    }
 
     try {
-        const orderItem = await createOrderItemTransaction(id_order, id_product, amount);
-        return res.status(201).json(orderItem);
-    
-    }catch(e){
+        const result = await createOrderItemsTransaction(
+            id_orders,
+            items
+        );
 
-        console.log(e);
+        return res.status(201).json(result);
 
-        if(e.message === "ProductNotFound"){
+    } catch (error) {
+        console.error(error);
+
+        if (error.message === "OrderNotFound") {
+            return res.status(404).json({
+                message: "Order not found"
+            });
+        }
+
+        if (error.message === "ProductNotFound") {
             return res.status(404).json({
                 message: "Product not found"
             });
-        };  
-        
+        }
+
         return res.status(500).json({
-            message: "Internal Server Error"});
-    };
-};
+            message: "Internal server error"
+        });
+    }
+}
 
 
 export async function deleteOrderItemController (req, res){

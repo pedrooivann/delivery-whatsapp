@@ -98,7 +98,7 @@ function ClientInfo ({client, onDelete, onUpdate, onClose}) {
                     />
 
 
-                <div className='client-buttons-container'>
+                <div className='buttons-container'>
 
                         {!isEditing && <button 
                         type='button'

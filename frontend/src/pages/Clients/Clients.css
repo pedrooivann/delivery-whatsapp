@@ -23,7 +23,7 @@
     height: 35px;
 }
 
-.client-buttons-container {
+.buttons-container {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;

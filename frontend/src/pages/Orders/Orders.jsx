@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 
 function Orders (){
 
+
     const [orders, setOrders] = useState([]);
 
     console.log(orders)
@@ -55,9 +56,11 @@ function Orders (){
             )
 
             setOrders((prev)=>[...prev, newOrder.order]);
+            return newOrder.order;
 
         } catch (e) {
             console.error(e)
+            throw e;
         }
     }
 
@@ -121,12 +124,14 @@ function Orders (){
                         <Sidebar/>
 
                         <div className="content-section">
-                            <OrderSearchBar/>
+                            <OrderSearchBar 
+                                onCreateOrder={handleCreateOrder}/>
 
                         <hr className="content-section-main-hr"/>
 
                         <OrderList
-                            orders={orders}/>
+                            orders={orders}
+                            />
 
                         </div>
                 </div>
